@@ -39,8 +39,8 @@ public class St8DbFacade {
         }
     }
 
-    public Optional<St8Member> selectMember(Integer stageId) { // Java8 style
-        return Optional.ofNullable(oldselectMember(stageId));
+    public Optional<St8Member> selectMember(Integer memberId) { // Java8 style
+        return Optional.ofNullable(oldselectMember(memberId));
     }
 
     // ===================================================================================

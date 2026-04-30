@@ -266,12 +266,15 @@ public class Step08Java8FunctionTest extends PlainTestCase {
      * (メソッド終了時の変数 sea の中身は？)
      */
     public void test_java8_optional_orElseThrow() {
-        Optional<St8Member> optMember = new St8DbFacade().selectMember(2);
-        St8Member member = optMember.orElseThrow(() -> new IllegalStateException("over"));
+        int requestedMemberId = 2; // #simulation actually request parameter
+        Optional<St8Member> optMember = new St8DbFacade().selectMember(requestedMemberId);
+        St8Member member = optMember.orElseThrow(() -> {
+            return new IllegalStateException("not found: requestedMemberId=" + requestedMemberId);
+        });
         String sea = "the";
         try {
             String reason = member.getWithdrawal().map(wdl -> wdl.oldgetPrimaryReason()).orElseThrow(() -> {
-                return new IllegalStateException("wave");
+                return new IllegalStateException("no withdrawal member: " + member.getMemberId());
             });
             sea = reason;
         } catch (IllegalStateException e) {
