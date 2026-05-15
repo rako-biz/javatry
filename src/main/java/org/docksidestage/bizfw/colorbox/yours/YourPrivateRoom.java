@@ -181,10 +181,13 @@ public class YourPrivateRoom {
 
     protected StandardColorBox makeEighthColorBox() { // duplicate color here
         StandardColorBox colorBox = new StandardColorBox(new BoxColor("yellow"), new BoxSize(30, 50, 40));
-        Set<String> set = new HashSet<String>();
-        set.add("2019/04/22");
-        set.add("2O19/04/22"); // super trap
-        colorBox.getUpperSpace().setContent(set);
+        Set<String> dateExpSet = new HashSet<String>();
+        dateExpSet.add("2019/04/22");
+        dateExpSet.add("2O19/04/22"); // super trap
+        dateExpSet.add("2026/5/15"); // jimi trap
+        dateExpSet.add("2001/09/4"); // me too
+        dateExpSet.add("894/01/01"); // me too
+        colorBox.getUpperSpace().setContent(dateExpSet);
         colorBox.getMiddleSpace().setContent(new BittersweetMemorableException("nullsidestage", doyoulikeNullPointer()));
         colorBox.getLowerSpace().setContent((FavoriteProvider) () -> "mystic");
         return colorBox;
