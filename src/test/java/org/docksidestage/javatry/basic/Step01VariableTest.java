@@ -47,7 +47,7 @@ public class Step01VariableTest extends PlainTestCase {
         String piari = null;
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
-        log(sea); // your answer? =>
+        log(sea); // your answer? => 出力する型がString型に対して、String型とInteger型と混ざって結合されているため、コンパイルエラーが起きるはず。そしてnullが入っているのでここで実行時のエラーが起きそう。だから、seaの中身は見れない。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
