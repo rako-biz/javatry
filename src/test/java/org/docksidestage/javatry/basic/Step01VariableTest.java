@@ -78,7 +78,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land;
         sea = land.add(new BigDecimal(1));
         sea.add(new BigDecimal(1));
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 417 プリミティブ型ではないので、L78でland変数への参照をseaに渡している。L79でland+1になり、L80でその合計を参照しているseaに+1になると思う。
     }
 
     // ===================================================================================
