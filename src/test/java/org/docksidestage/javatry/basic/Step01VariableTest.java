@@ -67,7 +67,7 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         sea = land;
         land++;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 415 プリミティブ型のint型なので、L68で値渡しをしてsea=land=415となり、landのみのインクリメントになるのでseaにはコピーされた415になる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
