@@ -58,6 +58,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land;
         land = land + "'s dreams";
         log(sea); // your answer? =>　oneman's dreams 上の問題で良しなにやってくれる言語なら変数が参照型になると思うので、L55,L56では文字列に対して変数がそれぞれ付けられ、L57で参照がlandを指している文字列になるから。L58ではlandが変わるだけでseaの出力はonemanになると思う。
+        // after test => oneman プリミティブ型は値渡しになり、オブジェクト型は参照渡しになる。landの再代入で新しくメモリが作られるので、seaが指し示す元のメモリ領域の内容は変わらない。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
