@@ -49,6 +49,16 @@ public class Step01VariableTest extends PlainTestCase {
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => 出力する型がString型に対して、String型とInteger型と混ざって結合されているため、コンパイルエラーが起きるはず。そしてnullが入っているのでここで実行時のエラーが起きそう。だから、seaの中身は見れない。
         // after test => mystic8null:mai そもそもString型は無く、StringクラスとIntegerクラスを+演算子で結合していた。Integerクラスは暗黙的にStringクラスに置き換わるみたい。そしてnullもそのままnullとして出力される。文字列といっしょに＋を使ったら文字列の結合になる
+        // TODO matsumoto [ふぉろー] yes, StringとIntegerで+するとStringに引き寄せられます by jflute (2026/07/09)
+        // nullだったら "null" という文字になってしまいます。これは言語によりけりです。
+        // 例えば、C#とかだったら空文字になります。
+        //
+        // ログとかで確認するときは null って表示されるのがわかりやすい一方で、
+        // ついつい画面に null って表示されてしまうミスも起こりがちで。
+        // 最近でも大手のメールで文章の途中に null って出てきたの見たことあります。
+        // ただ、開発時のデバッグとしてわかりやすいとも言えます。
+        // もし空文字だったら、画面やメール文章で項目値が出てないことに気づきにくいというのも。
+        // 一長一短ですね。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -59,6 +69,9 @@ public class Step01VariableTest extends PlainTestCase {
         land = land + "'s dreams";
         log(sea); // your answer? =>　oneman's dreams 上の問題で良しなにやってくれる言語なら変数が参照型になると思うので、L55,L56では文字列に対して変数がそれぞれ付けられ、L57で参照がlandを指している文字列になるから。L58ではlandが変わるだけでseaの出力はonemanになると思う。
         // after test => oneman プリミティブ型は値渡しになり、オブジェクト型は参照渡しになる。landの再代入で新しくメモリが作られるので、seaが指し示す元のメモリ領域の内容は変わらない。
+        // TODO matsumoto [いいね] そう、一瞬seaとlandが指し示すインスタンス "oneman" が同じになるのですが... by jflute (2026/07/09)
+        // その "oneman" と "'s dreams" を足して、新しく "oneman's dreams" というインスタンスを生成して land に入れているだけで、
+        // seaが指し示すインスタンスは変わらず "oneman" というわけですね。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -80,6 +93,14 @@ public class Step01VariableTest extends PlainTestCase {
         sea.add(new BigDecimal(1));
         log(sea); // your answer? => 417 プリミティブ型ではないので、L78でland変数への参照をseaに渡している。L79でland+1になり、L80でその合計を参照しているseaに+1になると思う。
         // after test => 416 参照が渡っているのは合っていそう。ただ、sea.addが想定と違う。Oracleのページから"値が (this + augend) でスケールが max(this.scale(), augend.scale()) の BigDecimal を返します。"とあるので、返り値で受け取っていれば加算された値が取得できる。今回は返り値を受け取っていないのでthisは変更されない。
+        // TODO matsumoto [いいね] JavaDocまでちゃんと見てるの素晴らしいです(^^。 by jflute (2026/07/09)
+        // add() が、自分自身に足すのか？足したものを戻すのか？２パターンあります。今回は後者だったわけですね。
+        // これは Immutable なオブジェクトなのか？ Mutable なオブジェクトなのか？に寄って変わります。
+        // Immutable/Mutable は聞いたことありますでしょうか？
+
+        // TODO jflute 1on1にて、Immutable/Mutable のお話 (2026/07/09)
+        // TODO jflute 1on1にて、JavaDocフォロー (2026/07/09)
+        // ↑こちらのとぅどぅは、くぼ備忘録ようなので、そのままにしておいてください。
     }
 
     // ===================================================================================
