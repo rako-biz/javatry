@@ -79,6 +79,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land.add(new BigDecimal(1));
         sea.add(new BigDecimal(1));
         log(sea); // your answer? => 417 プリミティブ型ではないので、L78でland変数への参照をseaに渡している。L79でland+1になり、L80でその合計を参照しているseaに+1になると思う。
+        // after test => 416 参照が渡っているのは合っていそう。ただ、sea.addが想定と違う。Oracleのページから"値が (this + augend) でスケールが max(this.scale(), augend.scale()) の BigDecimal を返します。"とあるので、返り値で受け取っていれば加算された値が取得できる。今回は返り値を受け取っていないのでthisは変更されない。
     }
 
     // ===================================================================================
