@@ -48,6 +48,7 @@ public class Step01VariableTest extends PlainTestCase {
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => 出力する型がString型に対して、String型とInteger型と混ざって結合されているため、コンパイルエラーが起きるはず。そしてnullが入っているのでここで実行時のエラーが起きそう。だから、seaの中身は見れない。
+        // after test => mystic8null:mai そもそもString型は無く、StringクラスとIntegerクラスを+演算子で結合していた。Integerクラスは暗黙的にStringクラスに置き換わるみたい。そしてnullもそのままnullとして出力される。文字列といっしょに＋を使ったら文字列の結合になる
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
