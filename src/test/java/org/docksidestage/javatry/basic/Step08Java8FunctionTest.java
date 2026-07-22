@@ -167,6 +167,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
      * (二つのlog()によって出力される文字列は同じでしょうか？ (yes or no))
      */
     public void test_java8_optional_concept() {
+        // #1on1: 将来、step8に来た時、step1の最初に色々気になったOptionalをじっくりやろう！ (2026/07/22)
         St8Member oldmember = new St8DbFacade().oldselectMember(1);
         if (oldmember != null) {
             log(oldmember.getMemberId(), oldmember.getMemberName());

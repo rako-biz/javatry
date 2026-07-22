@@ -49,7 +49,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => 出力する型がString型に対して、String型とInteger型と混ざって結合されているため、コンパイルエラーが起きるはず。そしてnullが入っているのでここで実行時のエラーが起きそう。だから、seaの中身は見れない。
         // after test => mystic8null:mai そもそもString型は無く、StringクラスとIntegerクラスを+演算子で結合していた。Integerクラスは暗黙的にStringクラスに置き換わるみたい。そしてnullもそのままnullとして出力される。文字列といっしょに＋を使ったら文字列の結合になる
-        // TODO matsumoto [ふぉろー] yes, StringとIntegerで+するとStringに引き寄せられます by jflute (2026/07/09)
+        // done matsumoto [ふぉろー] yes, StringとIntegerで+するとStringに引き寄せられます by jflute (2026/07/09)
         // nullだったら "null" という文字になってしまいます。これは言語によりけりです。
         // 例えば、C#とかだったら空文字になります。
         //
@@ -59,9 +59,19 @@ public class Step01VariableTest extends PlainTestCase {
         // ただ、開発時のデバッグとしてわかりやすいとも言えます。
         // もし空文字だったら、画面やメール文章で項目値が出てないことに気づきにくいというのも。
         // 一長一短ですね。
+        // #1on1: 些細なことでもメリデメを分析する習慣自体が大事 (2026/07/22)
         //
         // 聞きたい事： 言語によってもそれぞれ違うんですね。僕だったらnullは空文字の方が違和感ない気がします。nullはそもそも必要なのかどうか
         // ラッパークラスの存在する意味について
+        // #1on1: そもそも文法としてnullが必要かどうか？ (2026/07/22)
+        // 「値が存在しないかもしれない状況があるかどうか？(その状況を作らないようにしたい!?)」
+        // → DB設計でのnullのお話
+        // → その項目の業務上の重要度次第で、徹底するか？妥協するか？が決まったりする。
+        //
+        // 「値が存在しないことの表現方法をnullじゃなくて別物(Optional)にするか？」
+        // → 値が存在しないケースはあるのは仕方ないとして、せめてnullじゃない方法で
+        // → 浸透したのは最近10年くらい、それまでは、インフラの都合、文法の制約などで...
+        //   Optional的なやり方がやりづらかった。step8でやるのでそこでじっくりやりましょう。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -72,9 +82,12 @@ public class Step01VariableTest extends PlainTestCase {
         land = land + "'s dreams";
         log(sea); // your answer? =>　oneman's dreams 上の問題で良しなにやってくれる言語なら変数が参照型になると思うので、L55,L56では文字列に対して変数がそれぞれ付けられ、L57で参照がlandを指している文字列になるから。L58ではlandが変わるだけでseaの出力はonemanになると思う。
         // after test => oneman プリミティブ型は値渡しになり、オブジェクト型は参照渡しになる。landの再代入で新しくメモリが作られるので、seaが指し示す元のメモリ領域の内容は変わらない。
-        // TODO matsumoto [いいね] そう、一瞬seaとlandが指し示すインスタンス "oneman" が同じになるのですが... by jflute (2026/07/09)
+        // done matsumoto [いいね] そう、一瞬seaとlandが指し示すインスタンス "oneman" が同じになるのですが... by jflute (2026/07/09)
         // その "oneman" と "'s dreams" を足して、新しく "oneman's dreams" というインスタンスを生成して land に入れているだけで、
         // seaが指し示すインスタンスは変わらず "oneman" というわけですね。
+        // #1on1: インスタンスとは？ (2026/07/22)
+        // 一軒家の例え。インスタンスを正確に捉えることがプログラムを理解する上で大事。
+        // BigDecimalのエクササイズでもインスタンス何個エクササイズやった。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -85,6 +98,10 @@ public class Step01VariableTest extends PlainTestCase {
         land++;
         log(sea); // your answer? => 415 プリミティブ型のint型なので、L68で値渡しをしてsea=land=415となり、landのみのインクリメントになるのでseaにはコピーされた415になる。
         // after test => 415 合っているみたい。landの方もインクリメント後の値を見たら416だった。
+        // #1on1: プリミティヴ型のお話、言語によってintがプリミティヴなのかオブジェクトなのか (2026/07/22)
+        // ラッパー型の意義:
+        // toString(), .length() とか、オブジェクト指向の言語なので、オブジェクト指向的な扱いができるように。
+        // でも確かにIntegerは意義が薄い。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -92,8 +109,8 @@ public class Step01VariableTest extends PlainTestCase {
         BigDecimal sea = new BigDecimal(94);
         BigDecimal land = new BigDecimal(415);
         sea = land;
-        sea = land.add(new BigDecimal(1));
-        sea.add(new BigDecimal(1));
+        sea = land.add(new BigDecimal(1)); // 415+1=416
+        sea.add(new BigDecimal(1)); // 戻り値で無視しちゃってるけど、new自体はされてる
         log(sea); // your answer? => 417 プリミティブ型ではないので、L78でland変数への参照をseaに渡している。L79でland+1になり、L80でその合計を参照しているseaに+1になると思う。
         // after test => 416 参照が渡っているのは合っていそう。ただ、sea.addが想定と違う。Oracleのページから"値が (this + augend) でスケールが max(this.scale(), augend.scale()) の BigDecimal を返します。"とあるので、返り値で受け取っていれば加算された値が取得できる。今回は返り値を受け取っていないのでthisは変更されない。
         // TODO matsumoto [いいね] JavaDocまでちゃんと見てるの素晴らしいです(^^。 by jflute (2026/07/09)
@@ -104,6 +121,19 @@ public class Step01VariableTest extends PlainTestCase {
         // TODO jflute 1on1にて、Immutable/Mutable のお話 (2026/07/09)
         // TODO jflute 1on1にて、JavaDocフォロー (2026/07/09)
         // ↑こちらのとぅどぅは、くぼ備忘録ようなので、そのままにしておいてください。
+
+        // #1on1: immutableのメリット (2026/07/22)
+        // immutableメリット: 人間の記憶領域を節約しやすい、どこで変更されてるのかされてないのかの判断がしやすい。
+        // 安全性 → 可読性につながる。
+        // 変数のimmutableとインスタンスのimmutableという2面ある。
+        // immutableデメリット: メモリがくいやすい (インフラ面)
+        //   → 昨今のPCだと、メモリが大量にあるので、そこまで気にしなくても良くなった
+        // immutableの歴史
+        // Java: 100%は難しい印象。immutableを維持する配慮がそれなりにコードに必要。
+        // jfluteとしても、80%くらい頑張るけど、無理しない、mutableデメリットが発生しないよう工夫。
+        // immutableを実装しやすい文法が必要になるが、Javaはそこまで入ってない。
+        // 他の言語とかは、高度な文法を持ってて、immutableをやりやすくしてる。(文化)
+        // フレームワーク(LastaFlute)でのbodyクラスのimmutableジレンマの話。
     }
 
     // ===================================================================================
