@@ -161,7 +161,7 @@ public class Step01VariableTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_Integer() {
         Integer sea = instanceHangar;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 0 ラッパークラスだったとしてもIntgerクラスは0になりそう
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
