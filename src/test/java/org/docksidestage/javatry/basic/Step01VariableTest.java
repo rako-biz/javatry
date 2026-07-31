@@ -155,6 +155,7 @@ public class Step01VariableTest extends PlainTestCase {
     public void test_variable_instance_variable_default_int() {
         int sea = instanceDockside;
         log(sea); // your answer? => 0 プリミティブ型のintは0になりそう
+        // after test => 0 合ってる。プリミティブ型のintは0になるみたい
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
