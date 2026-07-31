@@ -196,6 +196,7 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => harbor 上の問題からするに、同じ名前のローカル変数の場合は新しく作られるっぽいので、L202でのconcatは適用されないということで、seaの文字列が出力される
         // after test => harbor 合っていそう
         // TODO jflute なぜ同じ名前の変数名を宣言できるようにしてあるのか。その利点欠点を知りたい。単純に名前空間が足りないから？ by r.matsumoto
+        // TODO jflute String.valueofは.toString()で対応できないのか。何か違いはある？　by r.matsumoto
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
