@@ -214,6 +214,7 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         helpMethodArgumentMethodcall(sea, land);
         log(sea); // your answer? => harbor 上記の問題と一緒に見えるが、String.valueofがなかったり、seaにconcatではなくappendしているのは意味がありそう？
+        // after test => harbor416 mutableな問題なのでそうなのかもしれないが、seaはコピーされてメソッドに渡されているわけではない？上のコメントの挙動にもよりそう？一旦ここまで。
     }
 
     private void helpMethodArgumentMethodcall(StringBuilder sea, int land) {
