@@ -171,7 +171,7 @@ public class Step01VariableTest extends PlainTestCase {
         instanceMagiclamp = "magician";
         helpInstanceVariableViaMethod(instanceMagiclamp);
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => bigband|1|null|magician seaという変数の前に、メソッドが呼ばれており、instanceMagiclampがローカル変数として使われるので、ローカル変数以外は変化し同じ名前でのローカル変数は新たな変数として使われるので、最後はmagicianとなると考えた。
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
