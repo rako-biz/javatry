@@ -147,7 +147,7 @@ public class Step01VariableTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_String() {
         String sea = instanceBroadway;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => null String型の初期値として設定されているのは空文字だからnullかな
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
