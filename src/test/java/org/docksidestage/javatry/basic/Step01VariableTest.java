@@ -172,6 +172,8 @@ public class Step01VariableTest extends PlainTestCase {
         helpInstanceVariableViaMethod(instanceMagiclamp);
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
         log(sea); // your answer? => bigband|1|null|magician seaという変数の前に、メソッドが呼ばれており、instanceMagiclampがローカル変数として使われるので、ローカル変数以外は変化し同じ名前でのローカル変数は新たな変数として使われるので、最後はmagicianとなると考えた。
+        // after test => bigband|1|null|magician 合ってそう。考えた時にはローカル変数は新しく作られると認識していた。
+        // TODO jfulte 同じスコープの変数は変更され、メソッド内にスコープが移った時にコピーされる？参照が渡される？同じ名前をローカル変数として渡した時には上書きされる？新しく作られる？この辺りが分からないです。 by r.matsumoto
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
