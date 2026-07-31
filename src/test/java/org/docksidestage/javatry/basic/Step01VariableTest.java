@@ -193,7 +193,7 @@ public class Step01VariableTest extends PlainTestCase {
         String sea = "harbor";
         int land = 415;
         helpMethodArgumentImmutableMethodcall(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harbor 上の問題からするに、同じ名前のローカル変数の場合は新しく作られるっぽいので、L202でのconcatは適用されないということで、seaの文字列が出力される
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
