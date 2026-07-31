@@ -148,6 +148,7 @@ public class Step01VariableTest extends PlainTestCase {
     public void test_variable_instance_variable_default_String() {
         String sea = instanceBroadway;
         log(sea); // your answer? => null String型の初期値として設定されているのは空文字だからnullかな
+        // after test => null 合ってる。参照型のインスタンス変数の初期値はnullらしい
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
