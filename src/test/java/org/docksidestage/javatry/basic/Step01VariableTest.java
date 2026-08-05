@@ -113,13 +113,13 @@ public class Step01VariableTest extends PlainTestCase {
         sea.add(new BigDecimal(1)); // 戻り値で無視しちゃってるけど、new自体はされてる
         log(sea); // your answer? => 417 プリミティブ型ではないので、L78でland変数への参照をseaに渡している。L79でland+1になり、L80でその合計を参照しているseaに+1になると思う。
         // after test => 416 参照が渡っているのは合っていそう。ただ、sea.addが想定と違う。Oracleのページから"値が (this + augend) でスケールが max(this.scale(), augend.scale()) の BigDecimal を返します。"とあるので、返り値で受け取っていれば加算された値が取得できる。今回は返り値を受け取っていないのでthisは変更されない。
-        // TODO matsumoto [いいね] JavaDocまでちゃんと見てるの素晴らしいです(^^。 by jflute (2026/07/09)
+        // done matsumoto [いいね] JavaDocまでちゃんと見てるの素晴らしいです(^^。 by jflute (2026/07/09)
         // add() が、自分自身に足すのか？足したものを戻すのか？２パターンあります。今回は後者だったわけですね。
         // これは Immutable なオブジェクトなのか？ Mutable なオブジェクトなのか？に寄って変わります。
         // Immutable/Mutable は聞いたことありますでしょうか？
 
-        // TODO jflute 1on1にて、Immutable/Mutable のお話 (2026/07/09)
-        // TODO jflute 1on1にて、JavaDocフォロー (2026/07/09)
+        // done jflute 1on1にて、Immutable/Mutable のお話 (2026/07/09)
+        // done jflute 1on1にて、JavaDocフォロー (2026/07/09)
         // ↑こちらのとぅどぅは、くぼ備忘録ようなので、そのままにしておいてください。
 
         // #1on1: immutableのメリット (2026/07/22)
@@ -173,7 +173,14 @@ public class Step01VariableTest extends PlainTestCase {
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
         log(sea); // your answer? => bigband|1|null|magician seaという変数の前に、メソッドが呼ばれており、instanceMagiclampがローカル変数として使われるので、ローカル変数以外は変化し同じ名前でのローカル変数は新たな変数として使われるので、最後はmagicianとなると考えた。
         // after test => bigband|1|null|magician 合ってそう。考えた時にはローカル変数は新しく作られると認識していた。
-        // TODO jfulte 同じスコープの変数は変更され、メソッド内にスコープが移った時にコピーされる？参照が渡される？同じ名前をローカル変数として渡した時には上書きされる？新しく作られる？この辺りが分からないです。 by r.matsumoto
+        // TODO done jflute 同じスコープの変数は変更され、メソッド内にスコープが移った時にコピーされる？参照が渡される？同じ名前をローカル変数として渡した時には上書きされる？新しく作られる？この辺りが分からないです。 by r.matsumoto
+        // TODO matsumoto [へんじ] まず、メソッドを呼び出す時というのは、呼び出し側で変数を引数に指定したとしても... by jflute (2026/08/05)
+        // 変数という箱自体が受け取り側に渡るのではなく、中身だけが渡って、受け取り側の引数変数(これもローカル変数扱い)に入ります。
+        // ゆえに、たまたま同じ名前の変数で受け渡しをしてたとしても、呼び出し側変数と受け取り側変数は、全くの別物(別の箱) となります。
+        // 厳密には、中身が渡るというか、ただアドレスがコピーされるだけで、
+        // 前のエクササイズでやってた sea = land; ってやってるのと同じです。
+        // 受け取りinstanceMagiclamp = 呼び出しinstanceMagiclamp;
+        // としているイメージです。
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -195,8 +202,15 @@ public class Step01VariableTest extends PlainTestCase {
         helpMethodArgumentImmutableMethodcall(sea, land);
         log(sea); // your answer? => harbor 上の問題からするに、同じ名前のローカル変数の場合は新しく作られるっぽいので、L202でのconcatは適用されないということで、seaの文字列が出力される
         // after test => harbor 合っていそう
-        // TODO jflute なぜ同じ名前の変数名を宣言できるようにしてあるのか。その利点欠点を知りたい。単純に名前空間が足りないから？ by r.matsumoto
-        // TODO jflute String.valueofは.toString()で対応できないのか。何か違いはある？　by r.matsumoto
+        // TODO done jflute なぜ同じ名前の変数名を宣言できるようにしてあるのか。その利点欠点を知りたい。単純に名前空間が足りないから？ by r.matsumoto
+        // TODO matsumoto [へんじ] 同じローカル変数でもスコープが変われば同じ名前を付けることができてしまいますが... by jflute (2026/08/05)
+        // 実務ではよく使われます。例えば、memberId (会員ID) という変数名で扱っていて、受け取り側でも memberId と付けるとか。
+        // 変数名には業務的な値を示す名前がよく使われます。業務的には呼び出し側も受け取り側も同じ「会員ID」というものを扱うので、
+        // なので同じ変数名が付けられやすいです。ここが利点というところですね。同じ名前を付けられなかったらキツくなってくるでしょう。
+
+        // TODO done jflute String.valueofは.toString()で対応できないのか。何か違いはある？　by r.matsumoto
+        // TODO matsumoto [へんじ] land がプリミティブ型なので、メソッドを持っていませんからtoString()が呼べません。 by jflute (2026/08/05)
+        // String.valueOf() をみると、Integer.toString(i) を呼び出していて、int を String に変換していますね。
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
@@ -215,6 +229,10 @@ public class Step01VariableTest extends PlainTestCase {
         helpMethodArgumentMethodcall(sea, land);
         log(sea); // your answer? => harbor 上記の問題と一緒に見えるが、String.valueofがなかったり、seaにconcatではなくappendしているのは意味がありそう？
         // after test => harbor416 mutableな問題なのでそうなのかもしれないが、seaはコピーされてメソッドに渡されているわけではない？上のコメントの挙動にもよりそう？一旦ここまで。
+        // TODO matsumoto [ふぉろー] 引数seaが参照しているインスタンスは、StringBuilder("harbor")インスタンスです。 by jflute (2026/08/05)
+        // StringBuilder が mutable なので、そのインスタンス自体が持っている中身が変化できます。(immutableなStringとの違い)
+        // help内のappend()で、自分自身インスタンスの中身を書き換えています。
+        // なので、test_側から見れば、help呼び出し前のと後で、同じインスタンスでも状態が変わってるということですね。
     }
 
     private void helpMethodArgumentMethodcall(StringBuilder sea, int land) {
