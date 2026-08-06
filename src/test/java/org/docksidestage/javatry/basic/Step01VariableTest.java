@@ -134,6 +134,15 @@ public class Step01VariableTest extends PlainTestCase {
         // immutableを実装しやすい文法が必要になるが、Javaはそこまで入ってない。
         // 他の言語とかは、高度な文法を持ってて、immutableをやりやすくしてる。(文化)
         // フレームワーク(LastaFlute)でのbodyクラスのimmutableジレンマの話。
+
+        // #1on1: BigDecimalの普通のadd()メソッド、インスタンスメソッド (2026/08/06)
+        // staticメソッドのお話も。
+
+        // #1on1: 膨大なシステムのコードを読むの大変話 (2026/08/06)
+        // BigDecimalのコードリーディング
+        // 漠然読み(構造だけ読んで)してから、当たりを付けて目的に沿ったフォーカス読み。
+
+        // TODO jflute step2でも漠然読みの話をやっていく (2026/08/06)
     }
 
     // ===================================================================================
@@ -173,14 +182,18 @@ public class Step01VariableTest extends PlainTestCase {
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
         log(sea); // your answer? => bigband|1|null|magician seaという変数の前に、メソッドが呼ばれており、instanceMagiclampがローカル変数として使われるので、ローカル変数以外は変化し同じ名前でのローカル変数は新たな変数として使われるので、最後はmagicianとなると考えた。
         // after test => bigband|1|null|magician 合ってそう。考えた時にはローカル変数は新しく作られると認識していた。
-        // TODO done jflute 同じスコープの変数は変更され、メソッド内にスコープが移った時にコピーされる？参照が渡される？同じ名前をローカル変数として渡した時には上書きされる？新しく作られる？この辺りが分からないです。 by r.matsumoto
-        // TODO matsumoto [へんじ] まず、メソッドを呼び出す時というのは、呼び出し側で変数を引数に指定したとしても... by jflute (2026/08/05)
+        // done jflute 同じスコープの変数は変更され、メソッド内にスコープが移った時にコピーされる？参照が渡される？同じ名前をローカル変数として渡した時には上書きされる？新しく作られる？この辺りが分からないです。 by r.matsumoto
+        // done matsumoto [へんじ] まず、メソッドを呼び出す時というのは、呼び出し側で変数を引数に指定したとしても... by jflute (2026/08/05)
         // 変数という箱自体が受け取り側に渡るのではなく、中身だけが渡って、受け取り側の引数変数(これもローカル変数扱い)に入ります。
         // ゆえに、たまたま同じ名前の変数で受け渡しをしてたとしても、呼び出し側変数と受け取り側変数は、全くの別物(別の箱) となります。
         // 厳密には、中身が渡るというか、ただアドレスがコピーされるだけで、
         // 前のエクササイズでやってた sea = land; ってやってるのと同じです。
         // 受け取りinstanceMagiclamp = 呼び出しinstanceMagiclamp;
         // としているイメージです。
+        // #1on1: オブジェクト型、参照型、Javaだと、どっちも同じものを示す (2026/08/06)
+        // オブジェクト型の変数は、すべて参照で実現されるので、すべてのオブジェクト型は参照型。
+
+        // #1on1: 継承したときの変数の仕組みをちょっと先取り。step6のAnimal (2026/08/06)
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -202,15 +215,28 @@ public class Step01VariableTest extends PlainTestCase {
         helpMethodArgumentImmutableMethodcall(sea, land);
         log(sea); // your answer? => harbor 上の問題からするに、同じ名前のローカル変数の場合は新しく作られるっぽいので、L202でのconcatは適用されないということで、seaの文字列が出力される
         // after test => harbor 合っていそう
-        // TODO done jflute なぜ同じ名前の変数名を宣言できるようにしてあるのか。その利点欠点を知りたい。単純に名前空間が足りないから？ by r.matsumoto
-        // TODO matsumoto [へんじ] 同じローカル変数でもスコープが変われば同じ名前を付けることができてしまいますが... by jflute (2026/08/05)
+        // done jflute なぜ同じ名前の変数名を宣言できるようにしてあるのか。その利点欠点を知りたい。単純に名前空間が足りないから？ by r.matsumoto
+        // done matsumoto [へんじ] 同じローカル変数でもスコープが変われば同じ名前を付けることができてしまいますが... by jflute (2026/08/05)
         // 実務ではよく使われます。例えば、memberId (会員ID) という変数名で扱っていて、受け取り側でも memberId と付けるとか。
         // 変数名には業務的な値を示す名前がよく使われます。業務的には呼び出し側も受け取り側も同じ「会員ID」というものを扱うので、
         // なので同じ変数名が付けられやすいです。ここが利点というところですね。同じ名前を付けられなかったらキツくなってくるでしょう。
+        // #1on1: 欠点としては、まあ雑に同じ名前を使うと紛らわしいってのあるのと、同じスコープでかぶる場合はより紛らわしい。
+        // スコープ被りの同名変数はちょっと危険なので取り扱い注意。(お決まりのsetterの例を見てみた。でもそれぐらい!?)
 
-        // TODO done jflute String.valueofは.toString()で対応できないのか。何か違いはある？　by r.matsumoto
-        // TODO matsumoto [へんじ] land がプリミティブ型なので、メソッドを持っていませんからtoString()が呼べません。 by jflute (2026/08/05)
+        // done jflute String.valueofは.toString()で対応できないのか。何か違いはある？　by r.matsumoto
+        // done matsumoto [へんじ] land がプリミティブ型なので、メソッドを持っていませんからtoString()が呼べません。 by jflute (2026/08/05)
         // String.valueOf() をみると、Integer.toString(i) を呼び出していて、int を String に変換していますね。
+        // #1on1: Javaは、オブジェクト指向に100%傾倒しているわけではないので、若干こういった手続き的なプログラミングもある。
+
+        // #1on1: このエクササイズは、immutableをわかっていれば、helpを読まなくても答えがわかってしまう (2026/08/06)
+        // immutableというのは、読み手にとっての情報になる。
+        // mutableの引数は、ちゃんと中身を読まないと何されてるかわからない。
+
+        // #1on1: 質問: if文、switch文の例、switch文だと読み飛ばしがしやすい!? (2026/08/06)
+        // switch文にフィットするケースだったらその通りだと思います。
+        // 要は、制限があるものの方が読みやすい(判断しやすい)。
+        // ただ単純に制限があるものは、制限を超える要件が出てきた時に別の方法に切り替えないといけない。
+        // 書く方の都合と読む方の都合、書く方は、手段を切り替える判断をするのがちょい大変になることも。
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
@@ -229,7 +255,7 @@ public class Step01VariableTest extends PlainTestCase {
         helpMethodArgumentMethodcall(sea, land);
         log(sea); // your answer? => harbor 上記の問題と一緒に見えるが、String.valueofがなかったり、seaにconcatではなくappendしているのは意味がありそう？
         // after test => harbor416 mutableな問題なのでそうなのかもしれないが、seaはコピーされてメソッドに渡されているわけではない？上のコメントの挙動にもよりそう？一旦ここまで。
-        // TODO matsumoto [ふぉろー] 引数seaが参照しているインスタンスは、StringBuilder("harbor")インスタンスです。 by jflute (2026/08/05)
+        // done matsumoto [ふぉろー] 引数seaが参照しているインスタンスは、StringBuilder("harbor")インスタンスです。 by jflute (2026/08/05)
         // StringBuilder が mutable なので、そのインスタンス自体が持っている中身が変化できます。(immutableなStringとの違い)
         // help内のappend()で、自分自身インスタンスの中身を書き換えています。
         // なので、test_側から見れば、help呼び出し前のと後で、同じインスタンスでも状態が変わってるということですね。
@@ -240,6 +266,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea.append(land);
     }
 
+    // TODO jflute 次回1on1ここから (2026/08/06)
     // -----------------------------------------------------
     //                                   Variable Assignment
     //                                   -------------------
