@@ -276,6 +276,9 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         helpMethodArgumentVariable(sea, land);
         log(sea); // your answer? => harbor 上の方の問題で厳密には参照型のアドレスを渡すときにそのままではなくアドレスのコピーを渡しているとあったので、新しくアドレスを作る文でも元のミュータブルな文字列は変わらない。
+        // after test => harbor 合っていそう
+        // TODO jfulte 先輩からも教えてもらいましたが、Javaは全て値渡し（pass-by-value）のコピーが行われるということで合っていますか。基本型でもコピー（pass-by-value）、参照型でもアドレスのコピー（pass-by-value-of-the-reference）ということでしょうか。
+        // 以前、インフラの制限を考えたらそのままアドレスを渡して中身を書き換えた方がオブジェクトをコピーするよりも良いというような話だったと思いますが、この仕様になっている背景などはありますか。
     }
 
     private void helpMethodArgumentVariable(StringBuilder sea, int land) {
