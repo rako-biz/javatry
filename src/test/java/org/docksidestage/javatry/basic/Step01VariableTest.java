@@ -275,7 +275,7 @@ public class Step01VariableTest extends PlainTestCase {
         StringBuilder sea = new StringBuilder("harbor");
         int land = 415;
         helpMethodArgumentVariable(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harbor 上の方の問題で厳密には参照型のアドレスを渡すときにそのままではなくアドレスのコピーを渡しているとあったので、新しくアドレスを作る文でも元のミュータブルな文字列は変わらない。
     }
 
     private void helpMethodArgumentVariable(StringBuilder sea, int land) {
