@@ -69,6 +69,8 @@ public class Step02IfForTest extends PlainTestCase {
             sea = 9;
         }
         log(sea); // your answer? => 7 else~はその前の条件に合致しないときに条件文を見にいくと思っているから。sea=7でif文が止まると思う
+        // after test => 7 認識は合っていそう。
+        // TODO jflute ただ、switch文の場合はbreak文を書かないと上から条件に合う場合全てに処理内容を走らせる？ by r.matsumoto
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
