@@ -311,6 +311,7 @@ public class Step01VariableTest extends PlainTestCase {
         String sea = "mystic";
         Integer land = null;
         log(sea, land, piari);
+        // after test => mystic, null, 0
     }
     private int piari;
 
