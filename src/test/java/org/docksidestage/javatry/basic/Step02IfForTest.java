@@ -53,6 +53,7 @@ public class Step02IfForTest extends PlainTestCase {
             sea = 7;
         }
         log(sea); // your answer? => 7
+        // after test => 7
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
