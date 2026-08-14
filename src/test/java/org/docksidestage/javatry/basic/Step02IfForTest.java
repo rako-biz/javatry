@@ -110,7 +110,7 @@ public class Step02IfForTest extends PlainTestCase {
         if (land) {
             sea = 10;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 10 一つ前の設問でelse~は条件に合わない時に処理内容を実行するので条件に合うときは飛ばす感じなのでそれに沿うように読んだ。ifの条件文の短絡評価もあるみたい？
     }
 
     // ===================================================================================
