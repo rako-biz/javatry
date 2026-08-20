@@ -266,25 +266,47 @@ public class Step01VariableTest extends PlainTestCase {
         sea.append(land);
     }
 
-    // TODO jflute 次回1on1ここから (2026/08/06)
+    // done jflute 次回1on1ここから (2026/08/06)
     // -----------------------------------------------------
     //                                   Variable Assignment
     //                                   -------------------
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_method_argument_variable_assignment() {
+        // 6丁目6番地にインスタンスを生成して、6丁目6番地という住所が書かれた紙がseaに入る
         StringBuilder sea = new StringBuilder("harbor");
         int land = 415;
+        // 6丁目6番地という情報が、help側のsea引数変数の紙にコピー(書き写)される
         helpMethodArgumentVariable(sea, land);
         log(sea); // your answer? => harbor 上の方の問題で厳密には参照型のアドレスを渡すときにそのままではなくアドレスのコピーを渡しているとあったので、新しくアドレスを作る文でも元のミュータブルな文字列は変わらない。
         // after test => harbor 合っていそう
-        // TODO jfulte 先輩からも教えてもらいましたが、Javaは全て値渡し（pass-by-value）のコピーが行われるということで合っていますか。基本型でもコピー（pass-by-value）、参照型でもアドレスのコピー（pass-by-value-of-the-reference）ということでしょうか。
+        // done jfulte 先輩からも教えてもらいましたが、Javaは全て値渡し（pass-by-value）のコピーが行われるということで合っていますか。基本型でもコピー（pass-by-value）、参照型でもアドレスのコピー（pass-by-value-of-the-reference）ということでしょうか。
         // 以前、インフラの制限を考えたらそのままアドレスを渡して中身を書き換えた方がオブジェクトをコピーするよりも良いというような話だったと思いますが、この仕様になっている背景などはありますか。
-        // TODO matsumoto ここはややこしいので、1on1でフォローしますね by jflute (2026/08/20)
+        // done matsumoto ここはややこしいので、1on1でフォローしますね by jflute (2026/08/20)
+        // #1on1: 値渡し、参照渡し、という言葉をあまり使わないようにしてきた背景 (2026/08/20)
+        // 値渡し: 値と言う言葉が何を指すのか？ 
+        //  A. 変数の中に入っているもの
+        //  B. 本当に業務的な値 (参照型の場合は、アドレスは値ではない、値はあくまでインスタンス)
+        // 参照渡し: (固有名詞)
+        //  A. 変数自体を渡してるのか？ → 箱自体がhelp側に旅立ったイメージ
+        //  B. アドレス(参照)を渡しているのか？ → 参照型の参照を渡してるから参照渡し!?
+        //
+        // #1on1: オブジェクトをコピーを言語のベースにするか？のお話 (2026/08/20)
+        // オブジェクトをコピー == インスタンスをもう一個作る
+        //  → 当然メモリは使う、インフラ的にはコピーで渡していると効率悪い
+        //  → 参照するだけでなく変更したいってこともある (mutableな引数)
+        //  → あと、オブジェクトをコピーって実は難しい!? (ディープコピーは大変、負荷高い)
+        //
+        // アドレス渡しって言葉と、参照渡しって言葉が危ない。
+        //
+        // 質問: 変数のスコープの中でしか、変数内のアドレスの書き直しは発生しないか？
+        //  → yes (つまり、本来の意味合いである参照渡しは発生しない)
     }
 
     private void helpMethodArgumentVariable(StringBuilder sea, int land) {
         ++land;
         String seaStr = sea.toString(); // is "harbor"
+        // 9丁目9番地にあたらしくインスタンスが生成されて、そのインスタンスのメソッドを呼んだ。
+        // そして、sea引数変数の6丁目6番地を消しゴムで消して、9丁目9番地に書き直している。
         sea = new StringBuilder(seaStr).append(land);
     }
 

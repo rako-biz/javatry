@@ -61,16 +61,22 @@ public class Step02IfForTest extends PlainTestCase {
         int sea = 904;
         if (sea > 904) {
             sea = 2001;
-        } else if (sea >= 904) {
+        } else if (sea >= 904) { // hit！したらbreakする
             sea = 7;
-        } else if (sea >= 903) {
+        } else if (sea >= 903) { // 上ですでにhitしたので、ここには来ない
             sea = 8;
         } else {
             sea = 9;
         }
         log(sea); // your answer? => 7 else~はその前の条件に合致しないときに条件文を見にいくと思っているから。sea=7でif文が止まると思う
         // after test => 7 認識は合っていそう。
-        // TODO jflute ただ、switch文の場合はbreak文を書かないと上から条件に合う場合全てに処理内容を走らせる？ by r.matsumoto
+        // #1on1: ↑合ってます！ (2026/08/20)
+        // done jflute ただ、switch文の場合はbreak文を書かないと上から条件に合う場合全てに処理内容を走らせる？ by r.matsumoto
+        // #1on1: Javaのswitch文の特徴。↑の通り。 (2026/08/20)
+        // 汎用性を少し増やしたswitch文としてデザインされているっぽいけど...
+        // その分、安全性と可読性を少し損なっている印象。
+        // スーパー汎用のif文と少し差がうまってしまいっている分、その存在感が低くなってる印象。
+        // なので、switchを積極利用するかしないか、人による。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -113,6 +119,7 @@ public class Step02IfForTest extends PlainTestCase {
         log(sea); // your answer? => 10 一つ前の設問でelse~は条件に合わない時に処理内容を実行するので条件に合うときは飛ばす感じなのでそれに沿うように読んだ。ifの条件文の短絡評価もあるみたい？
         // after test => 10 合っている。読んでいる場所もあっていそう？エディタの注釈で少し答えが分かってしまうが...JITコンパイラ？LSP？で評価してる？
         // TODO jflute 前置後置インクリメントデクリメントが読みづらい。業務で出てくることはあるのか。なぜこの仕様があるのか。状態の変更が処理の前後どちらかわからなくなる。by r.matsumoto
+        // TODO jflute 次回1on1でフォロー＆漠然読み (2026/08/20)
     }
 
     // ===================================================================================
