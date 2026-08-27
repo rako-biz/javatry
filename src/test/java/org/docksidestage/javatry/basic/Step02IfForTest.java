@@ -136,6 +136,7 @@ public class Step02IfForTest extends PlainTestCase {
             }
         }
         log(sea); // your answer? => null stageがget(i)でfor文が呼ばれるたびに初期化されているので、スコープの範囲からしてオブジェクトも消えると思う。なので、i=1で変数seaに紐付けられてもオブジェクトが無くなる
+        // after test => dockside スコープ外に抜けたとしてもオブジェクトは残ったまま？Listのスコープ内で処理を行っているので、stageListオブジェクトが残ったまま変数seaに紐づけられている感じかな？
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
