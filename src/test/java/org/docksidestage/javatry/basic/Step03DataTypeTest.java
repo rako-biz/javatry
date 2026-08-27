@@ -95,6 +95,7 @@ public class Step03DataTypeTest extends PlainTestCase {
         St3ImmutableStage stage = new St3ImmutableStage("hangar");
         String sea = stage.getStageName();
         log(sea); // your answer? => hangar 引数付きのコンストラクタが呼ばれて、値がフィールドにセットされてメソッドでそれを呼び出している。
+        // after test => hangar 合っていそう
     }
 
     private static class St3ImmutableStage {
