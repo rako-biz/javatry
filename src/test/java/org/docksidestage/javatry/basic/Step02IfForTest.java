@@ -216,7 +216,8 @@ public class Step02IfForTest extends PlainTestCase {
      */
     public void test_iffor_refactor_foreach_to_forEach() {
         List<String> stageList = prepareStageList();
-        String sea = null;
+        // String sea = null;
+        /**
         for (String stage : stageList) {
             if (stage.startsWith("br")) {
                 continue;
@@ -226,7 +227,17 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }
-        log(sea); // should be same as before-fix
+         */
+        stageList.forEach(stage -> {
+            if (stage.startsWith("br")) {
+                return;
+            }
+            if (stage.contains("ga")) {
+                log(stage);
+            }
+        });
+        // log(sea); // should be same as before-fix
+        // answer => hangar 実行結果が同じになるようにということだったので、logを中に入れてseaに代入できないエラーが出ないようにした。
     }
 
     /**
