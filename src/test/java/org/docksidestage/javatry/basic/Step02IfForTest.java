@@ -147,6 +147,7 @@ public class Step02IfForTest extends PlainTestCase {
             sea = stage;
         }
         log(sea); // your answer? => magiclamp 拡張for文でListの中身を読んでいって要素ごとに紐づけているので最後の要素が紐づけられるはず
+        // after test => magiclamp 答えも考え方も合っていそう
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
