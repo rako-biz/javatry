@@ -146,7 +146,7 @@ public class Step02IfForTest extends PlainTestCase {
         for (String stage : stageList) {
             sea = stage;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => magiclamp 拡張for文でListの中身を読んでいって要素ごとに紐づけているので最後の要素が紐づけられるはず
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
