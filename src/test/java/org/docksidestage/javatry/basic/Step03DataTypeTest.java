@@ -84,6 +84,7 @@ public class Step03DataTypeTest extends PlainTestCase {
             sea = 0;
         }
         log(sea); // your answer? => 2
+        // after test => 2 コメントの通りに行ってそう？
     }
 
     // ===================================================================================
