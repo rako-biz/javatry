@@ -54,7 +54,7 @@ public class Step03DataTypeTest extends PlainTestCase {
             BigDecimal addedDecimal = amba.add(new BigDecimal(land));
             sea = String.valueOf(addedDecimal);
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 18.4 bonvoで+1ヶ月されてgetMonthValue()で取得してlandと紐付けてland--で元のmonthに戻って、if文の中が処理される
     }
 
     // ===================================================================================
