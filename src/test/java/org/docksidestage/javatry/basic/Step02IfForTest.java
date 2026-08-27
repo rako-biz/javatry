@@ -135,7 +135,7 @@ public class Step02IfForTest extends PlainTestCase {
                 sea = stage;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => null stageがget(i)でfor文が呼ばれるたびに初期化されているので、スコープの範囲からしてオブジェクトも消えると思う。なので、i=1で変数seaに紐付けられてもオブジェクトが無くなる
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
