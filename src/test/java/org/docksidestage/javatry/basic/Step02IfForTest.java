@@ -163,7 +163,7 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => hanger 0番目のbrから始まる要素だけ変数に紐付けを飛ばして、gaを含むときに変数に紐付けした後にforを終了するはず
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
