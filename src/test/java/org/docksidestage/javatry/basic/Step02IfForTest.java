@@ -238,6 +238,7 @@ public class Step02IfForTest extends PlainTestCase {
         });
         // log(sea); // should be same as before-fix
         // answer => hangar 実行結果が同じになるようにということだったので、logを中に入れてseaに代入できないエラーが出ないようにした。
+        // after test => hangar 実行結果は大丈夫そうだが、HOWは他に方法ありそう
     }
 
     /**
