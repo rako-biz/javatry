@@ -193,6 +193,17 @@ public class Step02IfForTest extends PlainTestCase {
      */
     public void test_iffor_making() {
         // write if-for here
+        List<String> stageList = prepareStageList();
+        List<String> copiedStageList = prepareStageList();
+        for (String stage: stageList) {
+            if (stage.contains("a")) {
+                copiedStageList.remove(stage);
+            }
+        }
+        for (String stage: copiedStageList) {
+            log(stage);
+        }
+        // answer => dockside コピーの方法が分からなかったので、新たに関数を適用してリストを作成した
     }
 
     // ===================================================================================
