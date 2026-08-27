@@ -204,6 +204,7 @@ public class Step02IfForTest extends PlainTestCase {
             log(stage);
         }
         // answer => dockside コピーの方法が分からなかったので、新たに関数を適用してリストを作成した
+        // after test => dockside 出来ていそうだが、リストの作成方法は他にないのかな？
     }
 
     // ===================================================================================
