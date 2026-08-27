@@ -181,6 +181,7 @@ public class Step02IfForTest extends PlainTestCase {
         });
         String sea = sb.toString();
         log(sea); // your answer? => dockside 最初はlength=0なのでiが含まれるまで飛ばしてiが含まれるようになったらその要素をsbに付け足してlength>0になるので戻って出力する
+        // after test => dockside 合っていそう。ただ、returnがメソッドの返り値になるのかと誤訳しそうになる。continueやbreakじゃダメ？
     }
 
     // ===================================================================================
