@@ -148,6 +148,12 @@ public class Step02IfForTest extends PlainTestCase {
         }
         log(sea); // your answer? => magiclamp 拡張for文でListの中身を読んでいって要素ごとに紐づけているので最後の要素が紐づけられるはず
         // after test => magiclamp 答えも考え方も合っていそう
+
+        // #1on1: Javaの文法としてのループ二つ (2026/09/03)
+        // o intあいのfor文 :: Java当初から (1995年)
+        // o 拡張for文 (foreach文) :: Java10年目くらいから (2005年)
+        // すっきり書けるようになったので、ほとんど拡張for文に置き換えられた。
+        // なので、普通のfor文って言った時、ほとんど拡張for文の方を指すかなと。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -195,12 +201,12 @@ public class Step02IfForTest extends PlainTestCase {
         // write if-for here
         List<String> stageList = prepareStageList();
         List<String> copiedStageList = prepareStageList();
-        for (String stage: stageList) {
+        for (String stage : stageList) {
             if (stage.contains("a")) {
                 copiedStageList.remove(stage);
             }
         }
-        for (String stage: copiedStageList) {
+        for (String stage : copiedStageList) {
             log(stage);
         }
         // answer => dockside コピーの方法が分からなかったので、新たに関数を適用してリストを作成した
@@ -228,6 +234,11 @@ public class Step02IfForTest extends PlainTestCase {
             }
         }
          */
+        // TODO matsumoto stageListが固定ではない前提でも大丈夫か？ by jflute (2026/09/03)
+        // 例えば、"hangar" が存在しないstageListのとき同じ結果になるか？
+        // 例えば、"bongar" というstageが追加されたとき同じ結果になるか？
+        // 例えば、stageListが空っぽだったとき同じ結果になるか？
+        // (ここはもはや無理矢理でもいいので実現してみましょう。パズルトレーニング)
         stageList.forEach(stage -> {
             if (stage.startsWith("br")) {
                 return;
@@ -239,6 +250,42 @@ public class Step02IfForTest extends PlainTestCase {
         // log(sea); // should be same as before-fix
         // answer => hangar 実行結果が同じになるようにということだったので、logを中に入れてseaに代入できないエラーが出ないようにした。
         // after test => hangar 実行結果は大丈夫そうだが、HOWは他に方法ありそう
+
+        // #1on1: なんで外側のローカル変数の再代入がダメなのか？ (2026/09/03)
+        // $forEach()メソッドは、メソッドとして呼ばれているから？？？
+        // forEach()メソッドは、実は単なるメソッド (一緒にコード読んでみた)
+        //
+        // なんで、continue;break; が使えないのか？
+        // -> {} が、実は accept()メソッドで、for文から見れば別クラス別メソッド。
+        // なので、for直下ではないから、forの文法が使えない。
+        // コンパイラーからすると、-> {} がループの処理かどうかは確定できない。
+        //
+        // 仮に外側のローカル変数を上書きできたら、ローカル変数としてのコンセプトが崩れる。
+        // 時系列的な矛盾が発生して、カオスが生まれやすいでしょう。
+        // なので、しっかりローカル変数としてんブランドを確立するためには、
+        // そもそも別クラス別メソッド(-> {})の中でも再代入はさせない方が良いだろうと。
+        // でも参照はできる。参照は変な副作用が起きないから、なので許している。
+        //
+        // 1ループの処理実装が、同じメソッド内扱いなのか？別クラス別メソッド扱いなのか？
+        // の違い。
+        //
+        // 拡張for文と、forEach()メソッドの特徴の違いはわかったところで...
+        // forEach()メソッドの存在意義は？ (Java20年目くらいから登場した後出し)
+        //
+        // $左から右に読みやすい？
+        // immutable/mutableの話を思い出して観ましょう。
+        // forEach()メソッドも、ある意味、制限の掛かったループと言える。
+        // なので、同様のメリット、安全性と可読性が得られる。
+        // シンプルでストレートなループを回す時は、forEach()メソッドの方が安全で読みやすい。
+        // (で、実際、webサービスのプログラムだと、ストレートなループの方が多い)
+        //
+        // なので、複数のループ選択肢で、適材適所ということになる。
+        //
+        // よもやま: 一方で、適材適所すぎるのもつらいという話も。
+        // 選ぶというのは使い分けの判断コストがかかる。
+        // (jfluteのif/switchの話と似てるかも)
+        // 工業デザインの話ですが、色々なところでこのジレンマは発生します。
+        // プログラミングにおいても同じ話。
     }
 
     /**
