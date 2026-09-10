@@ -37,6 +37,8 @@ public class Step04MethodTest extends PlainTestCase {
         String sea = supplySomething();
         log(sea); // your answer? => in supply: over    logの中身を見て、{}がreplaceされてString返されてtoStringされてdebugに出力されている
                   // your answer? => over               関数で返ってきたオブジェクトをdebugに出力されている
+        // after test => in supply: over
+        // after test => over               答えと考え方は合っていそう
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
