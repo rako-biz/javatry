@@ -46,7 +46,12 @@ public class Step04MethodTest extends PlainTestCase {
         String sea = functionSomething("mystic");
         consumeSomething(supplySomething());
         runnableSomething();
-        log(sea); // your answer? => 
+        log(sea);
+        // your answer? => in function: mysmys
+        // your answer? => in supply: over
+        // your answer? => in consume: mystic
+        // your answer? => in runnable: outofshadow
+        // your answer? => mysmys
     }
 
     private String functionSomething(String name) {
