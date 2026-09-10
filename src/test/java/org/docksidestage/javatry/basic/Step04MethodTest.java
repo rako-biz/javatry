@@ -52,6 +52,11 @@ public class Step04MethodTest extends PlainTestCase {
         // your answer? => in consume: mystic
         // your answer? => in runnable: outofshadow
         // your answer? => mysmys
+        // after test => in function: mysmys
+        // after test => in supply: over
+        // after test => in consume: mystic
+        // after test => in runnable: outofshadow
+        // after test => mysmys                     答えは合っていそう。replaceはコード読まずに説明だけ読んだけど大丈夫そう。
     }
 
     private String functionSomething(String name) {
