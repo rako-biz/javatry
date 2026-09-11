@@ -196,5 +196,6 @@ public class Step04MethodTest extends PlainTestCase {
 
     private void showSea(String str){
         log(str); // 'BBB'
+        // after test => 'BBB'
     }
 }
