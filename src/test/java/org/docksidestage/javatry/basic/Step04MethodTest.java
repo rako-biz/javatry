@@ -129,7 +129,7 @@ public class Step04MethodTest extends PlainTestCase {
         }
         ++sea;
         sea = inParkCount;
-        log(sea); // your answer? => 0
+        log(sea); // your answer? => 0  初期値としてsea,inParkCountに0が入っており、メソッドでfalseとなるのでカウントが発生しなくてinParkCountで上書きされる
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
