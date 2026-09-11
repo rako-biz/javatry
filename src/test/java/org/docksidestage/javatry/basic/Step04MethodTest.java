@@ -89,7 +89,7 @@ public class Step04MethodTest extends PlainTestCase {
         if (!land) {
             sea = sea + mutable.getStageName().length();
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 904    mutableをhelloMutable内でsetしているがローカル変数なので元のオブジェクトは変わらない
     }
 
     private int helloMutable(int sea, Boolean land, St4MutableStage piari) {
@@ -128,7 +128,7 @@ public class Step04MethodTest extends PlainTestCase {
         }
         ++sea;
         sea = inParkCount;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 0
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
