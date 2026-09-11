@@ -167,12 +167,34 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_making() {
         // use after making these methods
-        //String replaced = replaceCwithB(replaceAwithB("ABC"));
-        //String sea = quote(replaced, "'");
-        //if (isAvailableLogging()) {
-        //    showSea(sea);
-        //}
+        String replaced = replaceCwithB(replaceAwithB("ABC"));
+        String sea = quote(replaced, "'");
+        if (isAvailableLogging()) {
+            showSea(sea);
+        }
     }
 
     // write methods here
+    private String replaceCwithB(String str){
+        return str.replace("C", "B");
+    }
+
+    private String replaceAwithB(String str){
+        return str.replace("A", "B");
+    }
+
+    private String quote(String str, String c){
+        String concathead = c.concat(str);
+        String concatend = concathead.concat(c);
+        return concatend; // ここconcatじゃなくてjoinでも出来そう。concatの方がnewしてたので扱いやすそうだったからそうした。
+    }
+
+    private boolean availableLogging = true;
+    private boolean isAvailableLogging(){
+        return availableLogging;
+    }
+
+    private void showSea(String str){
+        log(str); // 'BBB'
+    }
 }
