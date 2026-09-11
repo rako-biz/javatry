@@ -90,6 +90,7 @@ public class Step04MethodTest extends PlainTestCase {
             sea = sea + mutable.getStageName().length();
         }
         log(sea); // your answer? => 904    mutableをhelloMutable内でsetしているがローカル変数なので元のオブジェクトは変わらない
+        // after test => 910    ローカル変数であったとしても参照型はアドレスのコピーを渡されるからってことなのかな。基本型は変わらないのは理解している。
     }
 
     private int helloMutable(int sea, Boolean land, St4MutableStage piari) {
