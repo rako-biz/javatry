@@ -222,8 +222,8 @@ public class Step02IfForTest extends PlainTestCase {
      */
     public void test_iffor_refactor_foreach_to_forEach() {
         List<String> stageList = prepareStageList();
-        // String sea = null;
-        /**
+
+        String sea = null;
         for (String stage : stageList) {
             if (stage.startsWith("br")) {
                 continue;
@@ -233,21 +233,24 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }
-         */
+        //log(sea); // should be same as before-fix
+
         // TODO matsumoto stageListが固定ではない前提でも大丈夫か？ by jflute (2026/09/03)
         // 例えば、"hangar" が存在しないstageListのとき同じ結果になるか？
         // 例えば、"bongar" というstageが追加されたとき同じ結果になるか？
         // 例えば、stageListが空っぽだったとき同じ結果になるか？
         // (ここはもはや無理矢理でもいいので実現してみましょう。パズルトレーニング)
+        List<String> finalList = new ArrayList<>();
         stageList.forEach(stage -> {
-            if (stage.startsWith("br")) {
-                return;
-            }
-            if (stage.contains("ga")) {
-                log(stage);
+            if (stageList.size() != 0){
+                if (stage.contains("ga")) {
+                    finalList.add(stage);
+                }
+            }else {
+                finalList.add(null);
             }
         });
-        // log(sea); // should be same as before-fix
+        log(finalList.get(finalList.size() - 1));
         // answer => hangar 実行結果が同じになるようにということだったので、logを中に入れてseaに代入できないエラーが出ないようにした。
         // after test => hangar 実行結果は大丈夫そうだが、HOWは他に方法ありそう
 
