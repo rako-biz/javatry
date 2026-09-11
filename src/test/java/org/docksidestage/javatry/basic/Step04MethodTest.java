@@ -130,6 +130,7 @@ public class Step04MethodTest extends PlainTestCase {
         ++sea;
         sea = inParkCount;
         log(sea); // your answer? => 0  初期値としてsea,inParkCountに0が入っており、メソッドでfalseとなるのでカウントが発生しなくてinParkCountで上書きされる
+        // after test => 100 booleanが基本型だということを忘れてローカル変数だからフィールドは変わらないことを忘れていた。変数のスコープとどこで宣言されているかに注意
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
