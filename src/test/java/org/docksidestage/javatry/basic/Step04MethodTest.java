@@ -37,8 +37,8 @@ public class Step04MethodTest extends PlainTestCase {
         String sea = supplySomething();
         log(sea); // your answer? => in supply: over    logの中身を見て、{}がreplaceされてString返されてtoStringされてdebugに出力されている
                   // your answer? => over               関数で返ってきたオブジェクトをdebugに出力されている
-        // after test => in supply: over
-        // after test => over               答えと考え方は合っていそう
+                  // after test => in supply: over
+                  // after test => over               答えと考え方は合っていそう
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -82,10 +82,10 @@ public class Step04MethodTest extends PlainTestCase {
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_method_object() {
-        St4MutableStage mutable = new St4MutableStage();
+        St4MutableStage mutable/*4丁目4番地*/ = new St4MutableStage();
         int sea = 904;
         boolean land = false;
-        helloMutable(sea - 4, land, mutable);
+        helloMutable(sea - 4, land, mutable/*4丁目4番地*/);
         if (!land) {
             sea = sea + mutable.getStageName().length();
         }
@@ -93,10 +93,16 @@ public class Step04MethodTest extends PlainTestCase {
         // after test => 910    ローカル変数であったとしても参照型はアドレスのコピーを渡されるからってことなのかな。基本型は変わらないのは理解している。
     }
 
-    private int helloMutable(int sea, Boolean land, St4MutableStage piari) {
+    private int helloMutable(int sea, Boolean land, St4MutableStage piari/*4丁目4番地*/) {
         sea++;
         land = true;
-        piari.setStageName("mystic");
+        piari.setStageName("mystic"); // #1on1: ここは変数の住所は変えてない
+        // #1on1: 変数の住所は変えるというのは、あくまで代入。piari = ... ってやって初めて住所が書き換わる
+        // $stageインスタンスを辿る時にpiariを経由するけど...
+        // そのたどった先のstageインスタンスの中身はmutable変数と共有している。
+        // piari経由で/*4丁目4番地*/のインスタンスの中身(中の変数)を書き換えたら...
+        // mutable経由で見た時も変わっている。(同じ実態だから)
+        //piari = new St4MutableStage(...); /*5丁目5番地*/
         return sea;
     }
 
@@ -175,26 +181,55 @@ public class Step04MethodTest extends PlainTestCase {
     }
 
     // write methods here
-    private String replaceCwithB(String str){
+    private String replaceCwithB(String str) {
         return str.replace("C", "B");
     }
 
-    private String replaceAwithB(String str){
+    private String replaceAwithB(String str) {
         return str.replace("A", "B");
     }
 
-    private String quote(String str, String c){
+    // #1on1: cの変数名はなんの略？ (2026/09/17)
+    // $character??? strもなんだか？
+    // strは、業務的な意味を持たない引数なので、strとかしか言いようがないのでOK。
+    //
+    // 例えば、replaceメソッドの引数を replacedTargetString とかにするかと言ったら...
+    // まあほとんどしない。引数が多くて識別したい時はするってくらい。
+    //
+    // $引数が多くなった場合、メソッドを分割してそれぞれの引数を減らす方が良いか？
+    // 多くの場合、yes。それができる場面であれば。
+    // (できないケースは多くの引数をほぼ同時使うとかで入り組んでる場合)
+    // できるケースなら分けて、引数は最低限のものにしていく方が可読性は良くなりやすい。
+    //
+    // quote()の第二引数は...なんですか？何の値がって聞かれたらなんて答える？
+    // $引用符
+    // って答えられるのであれば、それを変数名にしたらどうでしょう？
+    //  e.g. (String str, String 引用符) // まあ実際は英語で
+    // 短いスコープでも、引数の場合は呼び出し側が引数を理解するのに使うので。
+    // ただのローカル変数は、内部の読みやすさのためだけの変数名になるが...
+    // 引数変数の場合は、呼び出し側が引数理解のために使う変数名になる。
+    // $引数変数はインターフェース的な役割の変数
+    // TODO matsumoto 第二引数、変数名を業務的な意味がわかるものを付けてみましょう by jflute (2026/09/17)
+    private String quote(String str, String c) {
         String concathead = c.concat(str);
         String concatend = concathead.concat(c);
         return concatend; // ここconcatじゃなくてjoinでも出来そう。concatの方がnewしてたので扱いやすそうだったからそうした。
+        // #1on1: 実は + の連結でもOK (2026/09/17)
+        //  e.g. return c + str + c;
+        // $concatで分離すると読みづらいので+の方が読みやすい
+        // 一応こうもできる return c.concat(str).concat(c);
+        // とはいえもうちょい。
     }
 
+    // TODO jflute 次回1on1にて、メソッドの定義順のお話も (2026/09/17)
+
     private boolean availableLogging = true;
-    private boolean isAvailableLogging(){
+
+    private boolean isAvailableLogging() {
         return availableLogging;
     }
 
-    private void showSea(String str){
+    private void showSea(String str) {
         log(str); // 'BBB'
         // after test => 'BBB'
     }

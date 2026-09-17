@@ -233,24 +233,47 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }
-        //log(sea); // should be same as before-fix
+        log(sea); // should be same as before-fix
 
-        // TODO matsumoto stageListが固定ではない前提でも大丈夫か？ by jflute (2026/09/03)
+        // done matsumoto stageListが固定ではない前提でも大丈夫か？ by jflute (2026/09/03)
         // 例えば、"hangar" が存在しないstageListのとき同じ結果になるか？
         // 例えば、"bongar" というstageが追加されたとき同じ結果になるか？
         // 例えば、stageListが空っぽだったとき同じ結果になるか？
         // (ここはもはや無理矢理でもいいので実現してみましょう。パズルトレーニング)
         List<String> finalList = new ArrayList<>();
         stageList.forEach(stage -> {
-            if (stageList.size() != 0){
-                if (stage.contains("ga")) {
-                    finalList.add(stage);
-                }
-            }else {
-                finalList.add(null);
+            if (stage.startsWith("br")) {
+                return; // continueの代わり
             }
+            finalList.add(stage); // sea = stage; の代わり
+            if (stage.contains("ga")) {
+                //break; できない
+            }
+
+            // おもいで
+            //if (stageList.size() != 0) { // 100% true
+            //    if (stage.contains("ga")) {
+            //        finalList.add(stage);
+            //    }
+            //} else {
+            //    finalList.add(null);
+            //}
         });
-        log(finalList.get(finalList.size() - 1));
+        // #1on1: [null, hangar] って配列の状態になる (2026/09/17)
+        // $stageListが空の時、->{}は実行されるのか？
+        // 実行されない、for文が空っぽで何ごともなく終了、finalListも空っぽ。
+        // 最後のやつを表示するという発想自体は本質を捉えている。
+        // $gaが二つの時、最後のやつが出てしまうような？
+        // それは良い直感です。ちょっと段階を踏んでいきましょう。
+        // ライブコーディングで一緒に、gaがないケースは解決した。
+        // TODO matsumoto "break; できない問題" がまだ未解決 by jflute (2026/09/17)
+        // 以下のログ表示処理は変えずにやってみましょう。
+        // but finalList.get(f... の調整はOK
+        if (finalList.isEmpty()) { // #1on1
+            log("null"); // 空っぽの時の辻褄合わせする
+        } else {
+            log(finalList.get(finalList.size() - 1));
+        }
         // answer => hangar 実行結果が同じになるようにということだったので、logを中に入れてseaに代入できないエラーが出ないようにした。
         // after test => hangar 実行結果は大丈夫そうだが、HOWは他に方法ありそう
 
