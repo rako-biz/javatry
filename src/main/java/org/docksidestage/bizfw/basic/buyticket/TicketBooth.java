@@ -56,7 +56,7 @@ public class TicketBooth {
      * @throws TicketSoldOutException When ticket in booth is sold out.
      * @throws TicketShortMoneyException When the specified money is short for purchase.
      */
-    public void buyOneDayPassport(Integer handedMoney) {
+    public Ticket buyOneDayPassport(Integer handedMoney) {
         quantityExist(quantity);
         checkHandedMoney(handedMoney, ONE_DAY_PRICE);
         --quantity;
@@ -65,6 +65,7 @@ public class TicketBooth {
         } else { // first purchase
             salesProceeds = ONE_DAY_PRICE;
         }
+        return new Ticket(ONE_DAY_PRICE);
     }
 
     public int buyTwoDayPassport(int handedMoney) {
