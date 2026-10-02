@@ -57,12 +57,8 @@ public class TicketBooth {
      * @throws TicketShortMoneyException When the specified money is short for purchase.
      */
     public void buyOneDayPassport(Integer handedMoney) {
-        if (quantity <= 0) {
-            throw new TicketSoldOutException("Sold out");
-        }
-        if (handedMoney < ONE_DAY_PRICE) {
-            throw new TicketShortMoneyException("Short money: " + handedMoney);
-        }
+        quantityExist(quantity);
+        checkHandedMoney(handedMoney, ONE_DAY_PRICE);
         --quantity;
         if (salesProceeds != null) { // second or more purchase
             salesProceeds = salesProceeds + ONE_DAY_PRICE;
@@ -72,12 +68,8 @@ public class TicketBooth {
     }
 
     public int buyTwoDayPassport(int handedMoney) {
-        if (quantity <= 0) {
-            throw new TicketSoldOutException("Sold out");
-        }
-        if (handedMoney < TWO_DAY_PRICE) {
-            throw new TicketShortMoneyException("Short money: " + handedMoney);
-        }
+        quantityExist(quantity);
+        checkHandedMoney(handedMoney, TWO_DAY_PRICE);
         --quantity;
         if (salesProceeds != null) { // second or more purchase
             salesProceeds = salesProceeds + TWO_DAY_PRICE;
@@ -89,6 +81,20 @@ public class TicketBooth {
         // そもそもif文で条件書いてreturnしたら`java: return文が指定されていません`とコンパイルエラーになった
         // if文の例：if (TWO_DAY_PRICE <= handedMoney) { return (handedMoney - TWO_DAY_PRICE)};
         return (handedMoney - TWO_DAY_PRICE);
+    }
+
+    // ここはcheck, existという単語に近いものを使うのだったらbooleanでも良いかと思ったが、booleanを使う用途が無い
+    public void quantityExist(int quantity) {
+        if (quantity <= 0) {
+            throw new TicketSoldOutException("Sold out");
+        }
+    }
+
+    // ここも上記と同じ懸念点。
+    public void checkHandedMoney(int handedMoney, int dayPrice) {
+        if (handedMoney < dayPrice) {
+            throw new TicketShortMoneyException("Short money: " + handedMoney);
+        }
     }
 
     public static class TicketSoldOutException extends RuntimeException {

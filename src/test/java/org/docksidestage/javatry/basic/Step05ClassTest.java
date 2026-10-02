@@ -138,7 +138,7 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_letsFix_refactor_recycle() {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
-        log(booth.getQuantity(), booth.getSalesProceeds()); // should be same as before-fix
+        log(booth.getQuantity(), booth.getSalesProceeds()); // should be same as before-fix // before test => 9, 7400
     }
 
     // ===================================================================================
