@@ -105,7 +105,7 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
         Integer sea = booth.getSalesProceeds();
-        log(sea); // should be same as one-day price, visual check here
+        log(sea); // should be same as one-day price, visual check here // 初回だったら1にして、二回目以降だったら1日券分のお金で割った分を足したいが、まだ1日券分のお金を渡されたものから引いてないので要検討
     }
 
     /**

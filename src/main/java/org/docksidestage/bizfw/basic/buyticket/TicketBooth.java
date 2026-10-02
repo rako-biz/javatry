@@ -64,9 +64,11 @@ public class TicketBooth {
         }
         --quantity;
         if (salesProceeds != null) { // second or more purchase
-            salesProceeds = salesProceeds + handedMoney;
+            for (int i=1; i <= (handedMoney / ONE_DAY_PRICE); i++) {
+                salesProceeds = salesProceeds + 1;
+            }
         } else { // first purchase
-            salesProceeds = handedMoney;
+            salesProceeds = 1;
         }
     }
 
