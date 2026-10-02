@@ -139,6 +139,7 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
         log(booth.getQuantity(), booth.getSalesProceeds()); // should be same as before-fix // before test => 9, 7400
+        // after test => 9, 7400　同じだが、冗長の判断軸がよく分からなかった。どこまで共通化して良いのかが難しく、今回は例外処理であれば他も使う可能性ありと判断してそれらのみ再利用できるようにした。
     }
 
     // ===================================================================================
