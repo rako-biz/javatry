@@ -53,6 +53,7 @@ public class Step05ClassTest extends PlainTestCase {
         booth.buyOneDayPassport(10000);
         Integer sea = booth.getSalesProceeds();
         log(sea); // your answer? => 1 newしたインスタンスで購入関数を適用しているから
+        // after test => 10000 購入回数だと勘違いしていたが、newした後のfirst purchaseなので、`salesProceeds = handedMoney;`これが評価されるだけ
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
