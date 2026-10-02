@@ -121,13 +121,14 @@ public class Step05ClassTest extends PlainTestCase {
         int change = booth.buyTwoDayPassport(money);
         Integer sea = booth.getSalesProceeds() + change; // todo jflute ここを読むまでsalesProceedsが購入手続き数だと思っていて、売上金だと思わなかったが書いてある文的には売上金ということで問題ない？ by r.matsumoto
         log(sea); // should be same as money // 14000
+        // after test => 14000
 
         // and show two-day passport quantity here
         // quantityは一日券と二日券で分けた方がいいかも？まとめてしまったら、quantityの例外処理が増える。分けたらどっちがどのぐらい売れたかが分かり、売上金も合算すればいいだけ。
         // getQuantity()がStep6でも使われている。としたら、quantity1つの中に券が二つ混在することになるがそれは良いのだろうか。
         int mountain;
         mountain = booth.getQuantity();
-        log(mountain);
+        log(mountain); // after test => 9
     }
 
     /**
