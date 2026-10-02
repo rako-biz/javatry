@@ -44,6 +44,7 @@ public class Step05ClassTest extends PlainTestCase {
         booth.buyOneDayPassport(7400);
         int sea = booth.getQuantity();
         log(sea); // your answer? => 9
+        // after test => 9
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
