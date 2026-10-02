@@ -54,6 +54,7 @@ public class Step05ClassTest extends PlainTestCase {
         Integer sea = booth.getSalesProceeds();
         log(sea); // your answer? => 1 newしたインスタンスで購入関数を適用しているから
         // after test => 10000 購入回数だと勘違いしていたが、newした後のfirst purchaseなので、`salesProceeds = handedMoney;`これが評価されるだけ
+        // after fixed test => 1　これで上記の問題はとりあえず解決した
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -106,6 +107,7 @@ public class Step05ClassTest extends PlainTestCase {
         booth.buyOneDayPassport(10000);
         Integer sea = booth.getSalesProceeds();
         log(sea); // should be same as one-day price, visual check here // 初回だったら1にして、二回目以降だったら1日券分のお金で割った分を足したいが、まだ1日券分のお金を渡されたものから引いてないので要検討
+        // after test => 1
     }
 
     /**
