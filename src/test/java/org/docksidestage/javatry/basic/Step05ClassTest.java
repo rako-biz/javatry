@@ -68,7 +68,8 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_howToUse_wrongQuantity() {
         Integer sea = doTest_class_ticket_wrongQuantity();
         log(sea); // your answer? => 9 お金の不足分を判定する前に`--quantity;`しているのでmax - 1になるはず。そして例外処理が走る
-        // aftet test => 9 合っているけど、お金ないのにquantity-1するのはどうなんだろう
+        // after test => 9 合っているけど、お金ないのにquantity-1するのはどうなんだろう
+        // after fixed test => 10 上記の問題は解決
     }
 
     private Integer doTest_class_ticket_wrongQuantity() {
@@ -93,6 +94,7 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_letsFix_ticketQuantityReduction() {
         Integer sea = doTest_class_ticket_wrongQuantity();
         log(sea); // should be max quantity, visual check here // quantityの計算をお金の判定の後に持ってきた
+        // after test => 例外処理の表示の後に、max quantityの10が表示される
     }
 
     /**
