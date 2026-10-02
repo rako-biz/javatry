@@ -61,6 +61,7 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         Integer sea = booth.getSalesProceeds();
         log(sea); // your answer? => null salesProceedsは参照型のIntegerでフィールドとして初期化されているため
+        // after test => null
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
