@@ -240,14 +240,16 @@ public class Step02IfForTest extends PlainTestCase {
         // 例えば、"bongar" というstageが追加されたとき同じ結果になるか？
         // 例えば、stageListが空っぽだったとき同じ結果になるか？
         // (ここはもはや無理矢理でもいいので実現してみましょう。パズルトレーニング)
-        List<String> finalList = new ArrayList<>();
+         List<String> finalList = new ArrayList<>();
         stageList.forEach(stage -> {
             if (stage.startsWith("br")) {
                 return; // continueの代わり
             }
-            finalList.add(stage); // sea = stage; の代わり
+             finalList.add(stage); // sea = stage; の代わり
             if (stage.contains("ga")) {
                 //break; できない
+                log(stage);
+                System.exit(0);
             }
 
             // おもいで
