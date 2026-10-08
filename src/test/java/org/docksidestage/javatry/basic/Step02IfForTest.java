@@ -246,17 +246,21 @@ public class Step02IfForTest extends PlainTestCase {
         // 使うクラスはリストであってもいいけど、複数の値を保持しなくていい。毎回上書きで良い。
         // finalList.add(stage); の部分が、追加になってるけど、上書きで良い。
         // つまり、リストの中身は常に要素が１個だけの状態で構わない。
-        // TODO matsumoto リストの中身は要素が1つだけになるように by jflute (2026/10/08)
-        List<String> finalList = new ArrayList<>();
+        // done matsumoto リストの中身は要素が1つだけになるように by jflute (2026/10/08)
+        String[] finalList = new String[1];
+        Boolean[] ga = new Boolean[1];
+        ga[0] = false;
         stageList.forEach(stage -> {
+            if (ga[0] == true) {
+                return;
+            }
             if (stage.startsWith("br")) {
                 return; // continueの代わり
             }
-            finalList.add(stage); // sea = stage; の代わり
+            finalList[0] = stage; // sea = stage; の代わり
             if (stage.contains("ga")) {
                 //break; できない
-                log(stage);
-                System.exit(0);
+                ga[0] = true;
             }
 
             // おもいで
@@ -281,10 +285,10 @@ public class Step02IfForTest extends PlainTestCase {
 
         // 以下のログ表示処理は変えずにやってみましょう。
         // but finalList.get(f... の調整はOK
-        if (finalList.isEmpty()) { // #1on1
+        if (finalList.length == 0) { // #1on1
             log("null"); // 空っぽの時の辻褄合わせする
         } else {
-            log(finalList.get(finalList.size() - 1));
+            log(finalList[0]);
         }
         // answer => hangar 実行結果が同じになるようにということだったので、logを中に入れてseaに代入できないエラーが出ないようにした。
         // after test => hangar 実行結果は大丈夫そうだが、HOWは他に方法ありそう
