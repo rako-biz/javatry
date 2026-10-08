@@ -240,12 +240,19 @@ public class Step02IfForTest extends PlainTestCase {
         // 例えば、"bongar" というstageが追加されたとき同じ結果になるか？
         // 例えば、stageListが空っぽだったとき同じ結果になるか？
         // (ここはもはや無理矢理でもいいので実現してみましょう。パズルトレーニング)
-         List<String> finalList = new ArrayList<>();
+
+        // #1on1: $リスト管理がどうだろうか？ (2026/10/08)
+        // 今回は、履歴を持つ必要がないので、複数の値を保持する必要がない。
+        // 使うクラスはリストであってもいいけど、複数の値を保持しなくていい。毎回上書きで良い。
+        // finalList.add(stage); の部分が、追加になってるけど、上書きで良い。
+        // つまり、リストの中身は常に要素が１個だけの状態で構わない。
+        // TODO matsumoto リストの中身は要素が1つだけになるように by jflute (2026/10/08)
+        List<String> finalList = new ArrayList<>();
         stageList.forEach(stage -> {
             if (stage.startsWith("br")) {
                 return; // continueの代わり
             }
-             finalList.add(stage); // sea = stage; の代わり
+            finalList.add(stage); // sea = stage; の代わり
             if (stage.contains("ga")) {
                 //break; できない
                 log(stage);
@@ -269,6 +276,9 @@ public class Step02IfForTest extends PlainTestCase {
         // それは良い直感です。ちょっと段階を踏んでいきましょう。
         // ライブコーディングで一緒に、gaがないケースは解決した。
         // TODO matsumoto "break; できない問題" がまだ未解決 by jflute (2026/09/17)
+        // #1on1: System.exit(0); でスーパーbreak、これはこれでよく考えました (2026/10/08)
+        // hint1: すでに "continueの代わり" ってところがある。ここを参考に。
+
         // 以下のログ表示処理は変えずにやってみましょう。
         // but finalList.get(f... の調整はOK
         if (finalList.isEmpty()) { // #1on1

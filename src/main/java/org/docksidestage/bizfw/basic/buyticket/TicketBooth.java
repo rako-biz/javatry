@@ -61,7 +61,7 @@ public class TicketBooth {
         checkHandedMoney(handedMoney, ONE_DAY_PRICE);
         --quantity;
         if (salesProceeds != null) { // second or more purchase
-            salesProceeds = salesProceeds + ONE_DAY_PRICE;
+            salesProceeds = salesProceeds + handedMoney;
         } else { // first purchase
             salesProceeds = ONE_DAY_PRICE;
         }

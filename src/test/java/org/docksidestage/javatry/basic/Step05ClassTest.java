@@ -109,7 +109,17 @@ public class Step05ClassTest extends PlainTestCase {
         Integer sea = booth.getSalesProceeds();
         log(sea); // should be same as one-day price, visual check here // 初回だったら1にして、二回目以降だったら1日券分のお金で割った分を足したいが、まだ1日券分のお金を渡されたものから引いてないので要検討
         // after test => 1
+        // #1on1: ↑ここも勘違いで、実際は売上の金額 (2026/10/08)
     }
+
+    // #1on1: バグの種類 (見つけやすい/見つけにくい) (2026/10/08)
+    // o お金不足でもチケットが減る問題: 複数行の流れのバグ (単行では合ってる) → 若干見つけづらい
+    // o 受け取ったお金の分だけ売上が増えていく問題: 単行のロジックのバグ → まあまあ見つけやすい
+    // レビューワーのとき、メインレビューワーなのか？サブレビューワーなのか？
+    // レビューワーのとき、この二つのパターンのバグ、特に複数行の流れのバグは気をつけて見ないと。
+    //
+    // 今回は、お金不足が発生した時だけおかしな挙動になるという限定症状なのでなおさら見つけづらい。
+    // 実務だと、もっと構造化されていて、場合によっては順序が非常にわかりにくくなるケースもある。
 
     /**
      * Make method for buying two-day passport (price is 13200). (which can return change as method return value)
@@ -120,13 +130,20 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         int money = 14000;
         int change = booth.buyTwoDayPassport(money);
-        Integer sea = booth.getSalesProceeds() + change; // todo jflute ここを読むまでsalesProceedsが購入手続き数だと思っていて、売上金だと思わなかったが書いてある文的には売上金ということで問題ない？ by r.matsumoto
+        Integer sea = booth.getSalesProceeds() + change;
+        // done jflute ここを読むまでsalesProceedsが購入手続き数だと思っていて、売上金だと思わなかったが書いてある文的には売上金ということで問題ない？ by r.matsumoto
+        // #1on1: 売上金で大丈夫です (2026/10/08)
         log(sea); // should be same as money // 14000
         // after test => 14000
 
         // and show two-day passport quantity here
         // quantityは一日券と二日券で分けた方がいいかも？まとめてしまったら、quantityの例外処理が増える。分けたらどっちがどのぐらい売れたかが分かり、売上金も合算すればいいだけ。
         // getQuantity()がStep6でも使われている。としたら、quantity1つの中に券が二つ混在することになるがそれは良いのだろうか。
+        // #1on1: 迷ったこと自体が素晴らしい。step6のquantityのニュアンスが確定しないので。 (2026/10/08)
+        // #1on1: javatry的には、後で分離せよってどうせ言われるので、今は共有で大丈夫です (2026/10/08)
+        // $step6もちゃんと把握した上で、仕様を決めた方が良いか？ (2026/10/08)
+        // 業務なら絶対にそうです。なので、javatryでもぜひやってもらえたらと。
+        // (1on1の最中に、最新javatryの修正を持ってきて、step6の説明したのでOK)
         int mountain;
         mountain = booth.getQuantity();
         log(mountain); // after test => 9
@@ -141,6 +158,31 @@ public class Step05ClassTest extends PlainTestCase {
         booth.buyOneDayPassport(10000);
         log(booth.getQuantity(), booth.getSalesProceeds()); // should be same as before-fix // before test => 9, 7400
         // after test => 9, 7400　同じだが、冗長の判断軸がよく分からなかった。どこまで共通化して良いのかが難しく、今回は例外処理であれば他も使う可能性ありと判断してそれらのみ再利用できるようにした。
+        // TODO matsumoto したら、これ以上は共通化できないでしょってところまでやってみましょう (例外以外もチャレンジ) by jflute (2026/10/08)
+        // #1on1: 共通化に関して (2026/10/08)
+        // $共通化し過ぎると共通処理に依存し過ぎるかな？とも思った。
+        // 共通処理に依存し過ぎると具体的に何が悪いのか？
+        // $別のところでこうしたいと思った時に、他のところで想定外ものになる。
+        // 共通処理の中で、twoDayのときだけこう、みたいな違いが発生しちゃったら？
+        //
+        // o その共通処理が、業務的に同じものを示すのか？
+        // o それとも、たまたま今コードが同じだけなのか？
+        // → 意味が同じかどうか？
+        //
+        // あとは、ちょっと違いがあっても、部分的に抽象化できるか？
+        // 色々抽象化テクニックあるけど、一番単純なのは引数。
+        // (ただ、引数が多くなり過ぎると見栄え悪くなるので、その場合、
+        // step6で出てくるようなオブジェクト指向的な解決とかも検討していくことにあるが...)
+        // $関数分割の手段は？
+        // それもアリ。確かに今度は関数が多くなり過ぎるのもあるかもなので、次はクラス解決が選択肢になる。
+        //
+        // ということで、今回のケースでは、priceとか具体的な値が違うだけど、
+        // ロジックの業務的に意味は同じものと捉えて良いので、再利用して大丈夫です。
+        //
+        // 再利用ちょいし過ぎに寄るか？再利用ちょい不足くらいに寄るか？どっちか。(ぴったりは難しい)
+        // どっちに寄せるかは、チームのリファクタリングスキルに寄るかな...
+        //
+        // javatryでは、リファクタリングスキル鍛えたいので、いったんやり過ぎてみましょう。
     }
 
     // ===================================================================================
