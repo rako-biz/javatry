@@ -209,10 +209,10 @@ public class Step04MethodTest extends PlainTestCase {
     // ただのローカル変数は、内部の読みやすさのためだけの変数名になるが...
     // 引数変数の場合は、呼び出し側が引数理解のために使う変数名になる。
     // $引数変数はインターフェース的な役割の変数
-    // TODO matsumoto 第二引数、変数名を業務的な意味がわかるものを付けてみましょう by jflute (2026/09/17)
-    private String quote(String str, String c) {
-        String concathead = c.concat(str);
-        String concatend = concathead.concat(c);
+    // done matsumoto 第二引数、変数名を業務的な意味がわかるものを付けてみましょう by jflute (2026/09/17)
+    private String quote(String str, String quote) {
+        String concathead = quote.concat(str);
+        String concatend = concathead.concat(quote);
         return concatend; // ここconcatじゃなくてjoinでも出来そう。concatの方がnewしてたので扱いやすそうだったからそうした。
         // #1on1: 実は + の連結でもOK (2026/09/17)
         //  e.g. return c + str + c;
