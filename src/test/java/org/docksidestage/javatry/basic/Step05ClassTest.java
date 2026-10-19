@@ -158,7 +158,7 @@ public class Step05ClassTest extends PlainTestCase {
         booth.buyOneDayPassport(10000);
         log(booth.getQuantity(), booth.getSalesProceeds()); // should be same as before-fix // before test => 9, 7400
         // after test => 9, 7400　同じだが、冗長の判断軸がよく分からなかった。どこまで共通化して良いのかが難しく、今回は例外処理であれば他も使う可能性ありと判断してそれらのみ再利用できるようにした。
-        // TODO matsumoto したら、これ以上は共通化できないでしょってところまでやってみましょう (例外以外もチャレンジ) by jflute (2026/10/08)
+        // done matsumoto したら、これ以上は共通化できないでしょってところまでやってみましょう (例外以外もチャレンジ) by jflute (2026/10/08)
         // #1on1: 共通化に関して (2026/10/08)
         // $共通化し過ぎると共通処理に依存し過ぎるかな？とも思った。
         // 共通処理に依存し過ぎると具体的に何が悪いのか？

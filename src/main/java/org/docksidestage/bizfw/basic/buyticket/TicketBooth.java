@@ -60,11 +60,7 @@ public class TicketBooth {
         quantityExist(quantity);
         checkHandedMoney(handedMoney, ONE_DAY_PRICE);
         --quantity;
-        if (salesProceeds != null) { // second or more purchase
-            salesProceeds = salesProceeds + handedMoney;
-        } else { // first purchase
-            salesProceeds = ONE_DAY_PRICE;
-        }
+        calculateSalesProceeds(salesProceeds, ONE_DAY_PRICE);
         return new Ticket(ONE_DAY_PRICE);
     }
 
@@ -72,11 +68,7 @@ public class TicketBooth {
         quantityExist(quantity);
         checkHandedMoney(handedMoney, TWO_DAY_PRICE);
         --quantity;
-        if (salesProceeds != null) { // second or more purchase
-            salesProceeds = salesProceeds + TWO_DAY_PRICE;
-        } else { // first purchase
-            salesProceeds = TWO_DAY_PRICE;
-        }
+        calculateSalesProceeds(salesProceeds, TWO_DAY_PRICE);
         // ここは上の金額ショートするかの判定を使ったほうがまとまりとしてはいいかもしれないが、returnすると考えるとquantityやsalesProceedsの計算ができなくなる。returnだけでも問題なさそう？
         // 例外処理として条件は省いてあるからreturnだけの方がいい？
         // そもそもif文で条件書いてreturnしたら`java: return文が指定されていません`とコンパイルエラーになった
@@ -95,6 +87,15 @@ public class TicketBooth {
     public void checkHandedMoney(int handedMoney, int dayPrice) {
         if (handedMoney < dayPrice) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
+        }
+    }
+
+    // そもそもsalesProceedsをIntegerで持つ必要はあるのか？intとかあればunsigned intにしておけば初期値が0になるしクラスを合わせなくていい気がする
+    public void calculateSalesProceeds(Integer salesProceeds, int dayPrice){
+        if (salesProceeds != null) { // second or more purchase
+            salesProceeds = salesProceeds + dayPrice;
+        } else { // first purchase
+            salesProceeds = dayPrice;
         }
     }
 
