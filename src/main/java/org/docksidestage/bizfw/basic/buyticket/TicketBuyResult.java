@@ -4,6 +4,7 @@ public class TicketBuyResult
 {
     private int change = 0;
 
+    // ここのコンストラクタには何を入れればいいのかわからない
     public TicketBuyResult(int ){
 
         return new Ticket();

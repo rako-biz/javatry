@@ -73,7 +73,7 @@ public class TicketBooth {
         // 例外処理として条件は省いてあるからreturnだけの方がいい？
         // そもそもif文で条件書いてreturnしたら`java: return文が指定されていません`とコンパイルエラーになった
         // if文の例：if (TWO_DAY_PRICE <= handedMoney) { return (handedMoney - TWO_DAY_PRICE)};
-        return (handedMoney - TWO_DAY_PRICE); // getChange(handedMoney - TWO_DAY_PRICE);かと思ったが、S5の書いてあるコードからして引数を取れない。
+        return (handedMoney - TWO_DAY_PRICE); // getChange(handedMoney - TWO_DAY_PRICE);かと思ったが、S5の書いてあるコードからして引数を取れない。そもそも返り値がTicketBuyResultなのでそれもできなさそう...
     }
 
     // ここはcheck, existという単語に近いものを使うのだったらbooleanでも良いかと思ったが、booleanを使う用途が無い
