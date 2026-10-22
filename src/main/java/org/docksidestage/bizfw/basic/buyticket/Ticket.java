@@ -29,6 +29,7 @@ public class Ticket {
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
+    // TODO jflute クラスのコンストラクターの書き方とかに悩みありなのでフォロー (2026/10/22)
     public Ticket(int displayPrice) {
         this.displayPrice = displayPrice;
     }

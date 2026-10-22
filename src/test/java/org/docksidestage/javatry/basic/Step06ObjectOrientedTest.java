@@ -198,6 +198,8 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     // ===================================================================================
     //                                                              Polymorphism Beginning
     //                                                              ======================
+    // TODO jflute $OOPでの読み方書き方 from step2 (2026/10/22)
+    // ここで補足。
     /**
      * What string is sea and land variable at the method end? <br>
      * (メソッド終了時の変数 sea, land の中身は？)

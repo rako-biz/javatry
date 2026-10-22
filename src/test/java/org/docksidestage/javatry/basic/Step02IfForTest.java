@@ -248,11 +248,46 @@ public class Step02IfForTest extends PlainTestCase {
         // つまり、リストの中身は常に要素が１個だけの状態で構わない。
         // done matsumoto リストの中身は要素が1つだけになるように by jflute (2026/10/08)
         String[] finalList = new String[1];
-        Boolean[] ga = new Boolean[1];
-        ga[0] = false;
+        // TODO matsumoto 名前、"ga" だけだと意味的に物足りない感があるので... by jflute (2026/10/22)
+        // e.g. foundGa, foundTarget, foundBreakTarget, (found[業務名])
+        //
+        // $gaは人間的に小文字ベースなので、foundGa で Ga になると気持ち悪い
+        // 直感性を重視するなら found_ga だが、Javaの慣習的にアンスコつなぎはあまり使わないので...
+        // foundGa で、変数名変数名みたいな感じで許容することが多い。(現場だと)
+        // (会社のプログラミングと、OSSの自分のプログラミングで若干、例外ケースを使うかどうか変わる)
+        // $同じ日でもスイッチできるか？
+        // 慣れたというのもあって、目の前のプログラムが自分の部屋なのか他人の部屋なのかで自然と切り替わる。
+        //
+        // 会社のプログラミングだと、コメントは多め:
+        // e.g.
+        // "ga" って言葉の見た目が合ってた方が直感的なのでアンスコつかってる by jflute
+        // Boolean[] found_ga = new Boolean[1];
+        //
+        // $コメントってどこまで書くのか？
+        //
+        // オートマティックおうむ返しコメントより背景や理由を
+        // https://jflute.hatenadiary.jp/entry/20180625/repeatablecomment
+        //
+        // 少なくともコードから読み取れないことは、誰も読み取れないのでそれは書いた方が良い。
+        // 一方で、書いておかないと自分がわからないだろう、という基準で書いてOK。
+        // 新卒が定期的に入ってくる現場ならなおさら。
+        //
+        // NxBatchRecorderの例
+        // https://jflute.hatenadiary.jp/entry/20190404/nxbatchrecorder
+        // 一方で、現場のコードの例。
+        //
+        // 既存に惑わされずに、必要だと思ったコメントはぜひ書いて言って欲しい。
+        //
+        // TODO jflute 次回、以下の質問対応 (2026/10/22)
+        // 質問リスト:
+        // $finalList は finalArray がいいのかな？
+        //
+        Boolean[] foundGa = new Boolean[1];
+        foundGa[0] = false;
         stageList.forEach(stage -> {
-            if (ga[0] == true) {
-                return;
+            // TODO matsumoto "if (ga[0]) {" で大丈夫 by jflute (2026/10/22)
+            if (foundGa[0] == true) {
+                return; // breakの代わり (最後まで空回し)
             }
             if (stage.startsWith("br")) {
                 return; // continueの代わり
@@ -260,7 +295,7 @@ public class Step02IfForTest extends PlainTestCase {
             finalList[0] = stage; // sea = stage; の代わり
             if (stage.contains("ga")) {
                 //break; できない
-                ga[0] = true;
+                foundGa[0] = true;
             }
 
             // おもいで
@@ -279,7 +314,7 @@ public class Step02IfForTest extends PlainTestCase {
         // $gaが二つの時、最後のやつが出てしまうような？
         // それは良い直感です。ちょっと段階を踏んでいきましょう。
         // ライブコーディングで一緒に、gaがないケースは解決した。
-        // TODO matsumoto "break; できない問題" がまだ未解決 by jflute (2026/09/17)
+        // done matsumoto "break; できない問題" がまだ未解決 by jflute (2026/09/17)
         // #1on1: System.exit(0); でスーパーbreak、これはこれでよく考えました (2026/10/08)
         // hint1: すでに "continueの代わり" ってところがある。ここを参考に。
 
@@ -355,4 +390,41 @@ public class Step02IfForTest extends PlainTestCase {
         stageList.add("magiclamp");
         return stageList;
     }
+
+    // TODO jflute 次回、以下の質問対応 (2026/10/22)
+    // $会社のコードとOSSのコードの責任の違い、AIを使ったら責任が軽くなる？
+    //  (自分の成果物ですという自信が少ない、どこまでAIに任せるべき？)
+    // $Java入門書の後の本
+    // $OOPでの読み方書き方 → step5, step6でも話をする
+    //
+    // $コミットメッセージに何を書く？
+    //  (コードコメントと同じこと書いてあるような？)
+    //
+    // done $オートマティックの記事でJIRAの
+    // https://.../WOLRDCUP_SERBIA-623
+    // のところ、現場だと git blame で追うから要らない指摘もあった。
+    // → それはその通りではあるけど、URLだとパッと見に行ける道のりにはなる。
+    // まあ、チームの決めでgit blame統一するとかならそれはそれで良いと思う。
+    // (コミットメッセージにチケット番号などが入ってること前提)
+    //
+    // 一方で、何も書いてないと、git blameした先に情報があるとなかなか思えない。
+    // チームに寄るかも。常にJIRA上ですごくしっかり書いてあるブランドが確立されてる現場ならOK。
+    // そうじゃないチームだったら、何もなければ辿ろうとも思えないので、URLが合った方が嬉しい。
+    // $ドキュメントは辿れるところに色々とある印象
+    // であれば確かにコードにリンク貼らずにgit blame統一でも良いのかなと。
+    //
+    // done $コードコメントとIssueの内容の二重管理
+    // → Issueがしっかり管理されている現場ならコードで長文は書かなくて良いかなと。
+    //   コードの状況というのがケースバイケースなのでそれ次第。
+    //
+    // done $リアーキ的なプロジェクトと、新規機能のプロジェクトで状況違うかも!?
+    // → まさしくそうで、ドキュメントの維持コストの違いある。
+    //
+    // $コメント書くは理解できたが、上流で決まった仕様のどの部分をコメントを書けば良いのか？
+    // どこまで書けば良いのか？
+    //
+    // $step5でつまづいているが、step6に進んだ方が良いか？
+    // あまりにも止まっちゃったら時間もったいないので、そのときはstep6へ。
+    // 止まっちゃったところを1on1でフォローしていくので、とぅどぅコメントとかで、
+    // 止まったことをメモで書いておいてください。
 }
