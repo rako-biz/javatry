@@ -64,7 +64,7 @@ public class TicketBooth {
         return new Ticket(ONE_DAY_PRICE);
     }
 
-    public int buyTwoDayPassport(int handedMoney) {
+    public TicketBuyResult buyTwoDayPassport(int handedMoney) {
         quantityExist(quantity);
         checkHandedMoney(handedMoney, TWO_DAY_PRICE);
         --quantity;
