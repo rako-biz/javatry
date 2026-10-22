@@ -10,7 +10,7 @@ public class TicketBuyResult
     }
 
     public Ticket getTicket(){
-        return ;
+        return new Ticket();
     }
 
     public int getChange(){
