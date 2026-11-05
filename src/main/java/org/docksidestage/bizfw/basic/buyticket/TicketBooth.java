@@ -24,8 +24,8 @@ public class TicketBooth {
     //                                                                          Definition
     //                                                                          ==========
     private static final int MAX_QUANTITY = 10;
-    private static final int ONE_DAY_PRICE = 7400; // when 2019/06/15
-    private static final int TWO_DAY_PRICE = 13200;
+    protected static final int ONE_DAY_PRICE = 7400; // when 2019/06/15
+    protected static final int TWO_DAY_PRICE = 13200;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -73,7 +73,7 @@ public class TicketBooth {
         // 例外処理として条件は省いてあるからreturnだけの方がいい？
         // そもそもif文で条件書いてreturnしたら`java: return文が指定されていません`とコンパイルエラーになった
         // if文の例：if (TWO_DAY_PRICE <= handedMoney) { return (handedMoney - TWO_DAY_PRICE)};
-        return new TicketBuyResult(handedMoney - TWO_DAY_PRICE);
+        return new TicketBuyResult(handedMoney);
     }
 
     // ここはcheck, existという単語に近いものを使うのだったらbooleanでも良いかと思ったが、booleanを使う用途が無い

@@ -12,7 +12,6 @@ public class TicketBuyResult {
     }
 
     public int getChange() {
-        TicketBooth booth = new TicketBooth();
-        return booth.buyTwoDayPassport(displayPrice).getChange();
+        return (this.displayPrice - TicketBooth.TWO_DAY_PRICE);
     }
 }
