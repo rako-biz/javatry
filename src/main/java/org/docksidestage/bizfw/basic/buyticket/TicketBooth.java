@@ -64,7 +64,7 @@ public class TicketBooth {
         return new Ticket(ONE_DAY_PRICE);
     }
 
-    public int buyTwoDayPassport(int handedMoney) {
+    public TicketBuyResult buyTwoDayPassport(int handedMoney) {
         quantityExist(quantity);
         checkHandedMoney(handedMoney, TWO_DAY_PRICE);
         --quantity;
@@ -73,7 +73,7 @@ public class TicketBooth {
         // 例外処理として条件は省いてあるからreturnだけの方がいい？
         // そもそもif文で条件書いてreturnしたら`java: return文が指定されていません`とコンパイルエラーになった
         // if文の例：if (TWO_DAY_PRICE <= handedMoney) { return (handedMoney - TWO_DAY_PRICE)};
-        return (handedMoney - TWO_DAY_PRICE);
+        return new TicketBuyResult(handedMoney - TWO_DAY_PRICE);
     }
 
     // ここはcheck, existという単語に近いものを使うのだったらbooleanでも良いかと思ったが、booleanを使う用途が無い
