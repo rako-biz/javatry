@@ -230,7 +230,7 @@ public class Step05ClassTest extends PlainTestCase {
         oneDayPassport.doInPark();
         log(oneDayPassport.isAlreadyIn()); // should be true
         TicketBooth booth2 = new TicketBooth();
-        Ticket twoDayPassport = booth2.buyOneDayPassport(20000);
+        Ticket twoDayPassport = booth2.buyTwoDayPassport(20000).getTicket();
         log(twoDayPassport.getDisplayPrice()); // should be same as two-day price
         log(twoDayPassport.isAlreadyIn()); // should be false
         twoDayPassport.doInPark();
