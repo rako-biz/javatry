@@ -286,7 +286,7 @@ public class Step02IfForTest extends PlainTestCase {
         foundGa[0] = false;
         stageList.forEach(stage -> {
             // TODO matsumoto "if (ga[0]) {" で大丈夫 by jflute (2026/10/22)
-            if (foundGa[0] == true) {
+            if (foundGa[0]) {
                 return; // breakの代わり (最後まで空回し)
             }
             if (stage.startsWith("br")) {
