@@ -223,6 +223,20 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_usePluralDays() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        Ticket oneDayPassport = booth.buyOneDayPassport(10000);
+        log(oneDayPassport.getDisplayPrice()); // should be same as one-day price
+        log(oneDayPassport.isAlreadyIn()); // should be false
+        oneDayPassport.doInPark();
+        log(oneDayPassport.isAlreadyIn()); // should be true
+        TicketBooth booth2 = new TicketBooth();
+        Ticket twoDayPassport = booth2.buyOneDayPassport(20000);
+        log(twoDayPassport.getDisplayPrice()); // should be same as two-day price
+        log(twoDayPassport.isAlreadyIn()); // should be false
+        twoDayPassport.doInPark();
+        log(twoDayPassport.isAlreadyIn()); // should be false <- 今回は1回目なのでfalse
+        twoDayPassport.doInPark();
+        log(twoDayPassport.isAlreadyIn()); // should be true <- 今回は2回目なのでtrue
     }
 
     /**
