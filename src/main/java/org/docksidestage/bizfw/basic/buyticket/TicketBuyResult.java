@@ -8,7 +8,7 @@ public class TicketBuyResult {
     }
 
     public Ticket getTicket() {
-        return new Ticket(displayPrice);
+        return new Ticket(TicketBooth.TWO_DAY_PRICE);
     }
 
     public int getChange() {
