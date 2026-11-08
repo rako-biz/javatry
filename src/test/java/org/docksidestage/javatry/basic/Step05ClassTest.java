@@ -222,6 +222,8 @@ public class Step05ClassTest extends PlainTestCase {
      * (TwoDayPassportなのに一回しか利用できません。複数日数に対応できるようにTicketを修正しましょう)
      */
     public void test_class_moreFix_usePluralDays() {
+        // TODO matsumoto まだTicketの複数日数対応は途中ですかね？ by jflute (2026/11/08)
+        // (テストはできてて、Ticket自体の修正はまだ？)
         // your confirmation code here
         TicketBooth booth = new TicketBooth();
         Ticket oneDayPassport = booth.buyOneDayPassport(10000);

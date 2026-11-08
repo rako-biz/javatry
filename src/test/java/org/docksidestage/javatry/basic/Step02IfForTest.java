@@ -248,7 +248,7 @@ public class Step02IfForTest extends PlainTestCase {
         // つまり、リストの中身は常に要素が１個だけの状態で構わない。
         // done matsumoto リストの中身は要素が1つだけになるように by jflute (2026/10/08)
         String[] finalList = new String[1];
-        // TODO done matsumoto 名前、"ga" だけだと意味的に物足りない感があるので... by jflute (2026/10/22)
+        // done matsumoto 名前、"ga" だけだと意味的に物足りない感があるので... by jflute (2026/10/22)
         // e.g. foundGa, foundTarget, foundBreakTarget, (found[業務名])
         //
         // $gaは人間的に小文字ベースなので、foundGa で Ga になると気持ち悪い
