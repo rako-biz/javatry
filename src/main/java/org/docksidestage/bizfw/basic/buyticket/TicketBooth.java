@@ -15,9 +15,11 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
-// TODO matsumoto クラスJavaDoc, @authorの追加をお願いします by jflute (2026/11/08)
+// TODO done matsumoto クラスJavaDoc, @authorの追加をお願いします by jflute (2026/11/08)
 /**
+ * チケットの購入などの処理を担当するクラス
  * @author jflute
+ * @author r.matsumoto
  */
 public class TicketBooth {
 
@@ -51,29 +53,24 @@ public class TicketBooth {
     // * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
     // * @throws TicketShortMoneyException 買うのに金額が足りなかったら
     // */
-    // TODO matsumoto JavaDoc, @returnを追加お願いします(戻り値をvoidからTicketに変えているので) by jflute (2026/11/08)
+    // TODO done matsumoto JavaDoc, @returnを追加お願いします(戻り値をvoidからTicketに変えているので) by jflute (2026/11/08)
     /**
      * Buy one-day passport, method for park guest.
      * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
      * @throws TicketSoldOutException When ticket in booth is sold out.
      * @throws TicketShortMoneyException When the specified money is short for purchase.
+     * @return Ticket 戻り値をvoidからTicketに変更し、お金がくれたら購入してTicketを返すようにした
      */
     public Ticket buyOneDayPassport(Integer handedMoney) {
-        // TODO matsumoto 再利用し過ぎし過ぎないの話をしましたが、トレーニングために積極的リファクタリング！ by jflute (2026/11/08)
+        // TODO done matsumoto 再利用し過ぎし過ぎないの話をしましたが、トレーニングために積極的リファクタリング！ by jflute (2026/11/08)
         // OneDayPassport, TwoDayPassport で処理の流れが全く同じなので、流れを再利用してみましょう。
         // 何か処理の順番が変更になったとき、OneDay/TwoDay両方直すのではなく、一箇所直すだけで済むように。
-        quantityExist(quantity);
-        checkHandedMoney(handedMoney, ONE_DAY_PRICE);
-        --quantity;
-        calculateSalesProceeds(salesProceeds, ONE_DAY_PRICE);
+        buyPassport(handedMoney, ONE_DAY_PRICE);
         return new Ticket(ONE_DAY_PRICE);
     }
 
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
-        quantityExist(quantity);
-        checkHandedMoney(handedMoney, TWO_DAY_PRICE);
-        --quantity;
-        calculateSalesProceeds(salesProceeds, TWO_DAY_PRICE);
+        buyPassport(handedMoney, TWO_DAY_PRICE);
         // ここは上の金額ショートするかの判定を使ったほうがまとまりとしてはいいかもしれないが、returnすると考えるとquantityやsalesProceedsの計算ができなくなる。returnだけでも問題なさそう？
         // 例外処理として条件は省いてあるからreturnだけの方がいい？
         // そもそもif文で条件書いてreturnしたら`java: return文が指定されていません`とコンパイルエラーになった
@@ -81,21 +78,29 @@ public class TicketBooth {
         return new TicketBuyResult(handedMoney);
     }
 
-    // TODO matsumoto 切り出したメソッドたちは公開する必要がないのでpublicではなくprivateで by jflute (2026/11/08)
+    // TODO jflute リファクタリングで処理をまとめようとしたが、ここは基本型のラッパークラスでまとめちゃってもいい？懸念点はある？ by r.matsumoto (2026/11/25)
+    private void buyPassport(Integer handedMoney, int DAY_PRICE){
+        quantityExist(quantity);
+        checkHandedMoney(handedMoney, DAY_PRICE);
+        --quantity;
+        calculateSalesProceeds(salesProceeds, DAY_PRICE);
+    }
+
+    // TODO done matsumoto 切り出したメソッドたちは公開する必要がないのでpublicではなくprivateで by jflute (2026/11/08)
 
     // ここはcheck, existという単語に近いものを使うのだったらbooleanでも良いかと思ったが、booleanを使う用途が無い
     // TODO matsumoto [ふぉろー] booleanを戻すまでもなくここで例外throwで十分なのでそれでGoodです by jflute (2026/11/08)
     // TODO matsumoto メソッド名、何かしら動詞でthrowする感が欲しいところですね。 by jflute (2026/11/08)
     // 一方で、checkHandedMoney() の方はcheckが付いていますので、統一性のためにも。
     // (checkが良いのかは置いておいて)
-    public void quantityExist(int quantity) {
+    private void quantityExist(int quantity) {
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
     }
 
     // ここも上記と同じ懸念点。
-    public void checkHandedMoney(int handedMoney, int dayPrice) {
+    private void checkHandedMoney(int handedMoney, int dayPrice) {
         if (handedMoney < dayPrice) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
@@ -105,7 +110,7 @@ public class TicketBooth {
     // TODO matsumoto [へんじ] ほとんど必要ないと言えると思いますので int にしちゃっても良いレベルです。 by jflute (2026/11/08)
     // あえて出すなら、「未購入の状態」と「購入したけど0円(0円商品がある場合)」を区別できることってくらいですね。
     // それを区別する必要はほぼないでしょうし、必要であればそれは別のことで表現してもよいでしょうし。
-    public void calculateSalesProceeds(Integer salesProceeds, int dayPrice) {
+    private void calculateSalesProceeds(Integer salesProceeds, int dayPrice) {
         if (salesProceeds != null) { // second or more purchase
             salesProceeds = salesProceeds + dayPrice;
         } else { // first purchase

@@ -1,9 +1,13 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
-// TODO matsumoto 最低限のクラスJavaDocをお願いします。(一行概要とauthor) by jflute (2026/11/08)
+// TODO done matsumoto 最低限のクラスJavaDocをお願いします。(一行概要とauthor) by jflute (2026/11/08)
+/**
+ * TicketクラスやTicketBoothクラスでの購入後の状態管理クラス
+ * @author r.matsumoto
+ */
 public class TicketBuyResult {
-    // TODO matsumoto immutableな属性なので、可読性のためにもfinalを付けましょう by jflute (2026/11/08)
-    private int displayPrice;
+    // TODO done matsumoto immutableな属性なので、可読性のためにもfinalを付けましょう by jflute (2026/11/08)
+    private final int displayPrice;
 
     public TicketBuyResult(int displayPrice) {
         this.displayPrice = displayPrice;
