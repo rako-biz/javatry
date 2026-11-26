@@ -15,7 +15,47 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
-// TODO done matsumoto クラスJavaDoc, @authorの追加をお願いします by jflute (2026/11/08)
+// #1on1: AIでしごとなくなるのはベテランも？ (2026/11/26)
+// 不安を持っているのはyes。
+// 作業の抽象度はどんどん上がってくる。
+// でもやることはいっぱいある。楽になった気がしない。
+// コーディングは少なくなってきてる。
+// コードとシステムのマネジメントに寄ってきている。
+// どんどんビジネス寄りになってくる。
+// jflute: 人生色々な経験することで、社会の仕組み自体に興味を持てるようになって...
+// システムの対象ビジネスも理解しやすくなって興味も(ある程度)持てるようになった。
+// 
+// てんしょくで技術興味のある会社とビジネス興味のある会社。
+// jflute: 技術興味のある会社の方のイメージではある
+// とはいえ、お金をもらっているからには、ある一定のビジネス興味も出して成果に活かす。
+//
+// $逆にビジネスに関わる機会が少ない。
+// これが5年とか続いたら確かにってのはあるけど、まだ半年なので...
+// 今の仕事でしか得られないものもある。それを得られる内に得ておく。
+// 今目の前の仕事を最大限やること、最大限って実は大変。
+//
+// TODO matsumoto [読み物課題] まず何より、目の前の道具を使いこなしてください by jflute (2026/11/26)
+// https://jflute.hatenadiary.jp/entry/20180223/mastercurrent
+//
+// 悩む時間がもったいない、という考え方。
+//
+// $最大限は？与えられたIssueの中の...
+// o 与えられたIssueの高い品質
+// o 終わりにするスピード (インプット深堀りする時間を入れ込められるように)
+// o システム全体の仕組みやビジネスの把握度 (範囲の広さ)
+//
+// TODO matsumoto [読み物課題]プライベートで一切勉強しなくても優秀になる七つのコツ by jflute (2026/11/26)
+// https://jflute.hatenadiary.jp/entry/20180911/outofprivate
+//
+// $深堀りってどこまで？ (まつもとさんの特徴からすると、どこまで深ぼっちゃう)
+// 意識して「踊り場」を見つけること。絶対のどこかにキリの良いラインがあるはず。
+// 踊り場見つけてメモっておくなどして、いつでも再開できるようにしておく。
+// 踊り場を見つけてないと、1年後に取り出しやすい記憶にならない。
+// (1丁目を塗りつぶすこと)
+//
+// done matsumoto クラスJavaDoc, @authorの追加をお願いします by jflute (2026/11/08)
+
+// TODO jflute 次回ペアプロの話 (2026/11/26)
 /**
  * チケットの購入などの処理を担当するクラス
  * @author jflute
@@ -53,7 +93,7 @@ public class TicketBooth {
     // * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
     // * @throws TicketShortMoneyException 買うのに金額が足りなかったら
     // */
-    // TODO done matsumoto JavaDoc, @returnを追加お願いします(戻り値をvoidからTicketに変えているので) by jflute (2026/11/08)
+    // done matsumoto JavaDoc, @returnを追加お願いします(戻り値をvoidからTicketに変えているので) by jflute (2026/11/08)
     /**
      * Buy one-day passport, method for park guest.
      * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
